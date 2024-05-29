@@ -27,3 +27,39 @@ where $\textbf{Î¦}$ is the design matrix, whose elements are given by $\textbf{Î
 ![Figure 1](fig/Figure1.png)
 
 Figure 1 shows different value of polynomial order $M$ and the corresponding polynomial curve fitting. As we can see, the polynomial curve fitting becomes more flexible as the order $M$ increases. However, if we set $M$ too large, the model will overfit the data, which means it will perform well on the training data but poorly on the test data.
+
+Another error measuring equation is RMS, which is the square root of the mean of the squares of the error function:
+
+$$E_{RMS} = \sqrt{2E(\textbf{w}^*)/N}$$
+
+![Figure2](fig/Figure2.png)
+
+The figure above shows the RMS error as a function of the order $M$ of the polynomial. As we can see, for training data, the RMS error decreases as the order $M$ increases. However, the RMS error on the test data increases as the order $M$ increases, which means the model is overfitting the data. 
+
+This is a little paradoxical, but it is a common phenomenon in machine learning. If $M=9$, there are 10 coefficients which means it should be able to fit 10 points exactly. However, as the figure shows, the RMS error on the test data is very large.
+
+![alt text](fig/image3.png)
+
+As the figure above shows, the coefficients of the polynomial model with $M=9$ are very large. So it only perform well on the training data. This a also a proof that we need add a regularization term to the error function to prevent overfitting.
+
+What means regularization? It means we add a term to the error function to penalize the large coefficients. In fact, in the coefficient space, there are a lot of solutions that can minimize the error function. But some of them are too large, it will obviously perform poorly on the unknwon data. So we need to choose the solution that has the smallest coefficients that will have a better generalization ability.
+
+So the regularized error function is:
+
+$$E(\textbf{w}) = \frac{1}{2}\sum_{n=1}^{N}\{y(x_n, \textbf{w}) - t_n\}^2 + \frac{\lambda}{2}||\textbf{w}||^2$$
+
+where $\lambda$ is the regularization coefficient, and $||\textbf{w}||^2$ is the square of the Euclidean norm of the weight vector $\textbf{w}$. From a high level aspect, we consider that we need to minimized the error function, incluing two terms. On the one hand, we need to minimized the original error function which is like MSE. On the other hand, we need to minimized the Euclidean norm of the weight vector. $\lambda$ is a trade off between the model complexity and the fitting ability.
+
+
+![alt text](fig/image5.png)
+
+And the figure above shows different $\lambda$ and the corresponding coefficients of the polynomial model with $M=9$. As we can see, the coefficients become smaller as $\lambda$ increases. And the RMS error on the test data decreases as $\lambda$ increases. So the regularization term can prevent overfitting.
+
+![alt text](fig/image4.png)
+
+
+
+Another methods to prevent overfitting is to add more training data. As the figure below shows, if we add more training data, the RMS error on the test data will decrease. Another way to say this is that the larger the training data, the better the generalization ability of the model.
+
+
+
