@@ -191,8 +191,54 @@ $$\ln p(\textbf{x}|μ, \sigma^2) = -\frac{1}{2\sigma^2}\sum_{i=1}^{D}(x_i - μ)^
 
 Back to the polynomial curve fitting problem, if we use maximize likelihood methods to solve the problem, there will be bias.
 
-**Unbias Estimation**: 
+**Unbias Estimation**: The definition of the unbiased estimation is that the expectation of the estimation is equal to the true value. In Gasussian distribution, the mean of the distribution is the unbiased estimation. While the variance of the distribution is the biased estimation.
 
+$$E[\mu_{ML}] = \mu$$
 
+$$E[\sigma^2_{ML}] = E[\frac{1}{N}\sum_{n=1}^{N}(x_n - \mu_{ML})^2] = \frac{N-1}{N}\sigma^2$$
 
+The reason for the bias is that the variance of the distribution is calculated by the mean of the distribution. So the variance of the distribution is the biased estimation. And the unbiased estimation of the variance is:
+
+$$\sigma^2 = \frac{N}{N-1} \sigma_{ML}^2 = \frac{1}{N-1}\sum_{n=1}^{N}(x_n - \mu_{ML})^2$$
+
+### 1.2.5 Curve Fitting Revisited
+
+The goal of the curve fitting problem is to find the optimal values of the parameters $\textbf{w}$ that minimize the error function. We believe that $t \sim N(y(x,\textbf{w}),\sigma^2) $.  In the Bayesian probability theory, we need to find the posterior distribution of the parameters $\textbf{w}$ given the data $D$ and the model $M$. The posterior distribution is defined as:
+
+$$p(t|x, \textbf{w}, \beta) = \mathcal{N}(t|y(x, \textbf{w}), \beta^{-1})$$
+
+where $\beta$ is inverse variance of the Gaussian distribution. Thus $p(t|x, \textbf{w}, \beta)$ is the likelihood function. 
+
+![image7](fig/image7.png)
+
+We use MLE, the likelihood function is biased for the variance but unbiased for the mean, so for any given data $x_i$, and the coiffient we get $\textbf{w}$, we have: $E[p(t|x_i, \textbf{w}, \beta)] = y(x_i, \textbf{w})$.
+
+And if we use the whole training data {$\textbf{x},\textbf{t}$} to calculate the likelihood function, we have:
+
+$$p(\textbf{t}|\textbf{x}, \textbf{w}, \beta) = \prod_{n=1}^{N}\mathcal{N}(t_n|y(x_n, \textbf{w}), \beta^{-1})$$
+
+The log likelihood function is:
+
+$$\ln p(\textbf{t}|\textbf{x}, \textbf{w}, \beta) = -\frac{\beta}{2}\sum_{n=1}^{N}\{y(x_n, \textbf{w}) - t_n\}^2 + \frac{N}{2}\ln \beta - \frac{N}{2}\ln(2\pi)$$
+
+Consider we use machine learning methods to find a optimal solution $\textbf{w}_{ML}$, we need to maximize the likelihood function. And consider the second term and last term, it is not related to the parameters $\textbf{w}$, so we can ignore them. So the optimization problem is:
+
+$$\textbf{w}_{ML} = \arg\max_{\textbf{w}}\{-\frac{\beta}{2}\sum_{n=1}^{N}\{y(x_n, \textbf{w}) - t_n\}^2\}$$
+
+And after that, let's consider the precision parameter $\beta$, if we find the optimal solution $\textbf{w}_{ML}$, we can get the optimal solution of $\beta$:
+
+$$\beta_{ML} = \frac{N}{\sum_{n=1}^{N}\{y(x_n, \textbf{w}_{ML}) - t_n\}^2}$$
+
+We know that $\beta$ is the precision parameter of the Gaussian distribution, which is the inverse of the variance. So the larger the $\beta$, the smaller the variance of the Gaussian distribution. And the smaller the $\beta$, the larger the variance of the Gaussian distribution. So the $\beta$ is a trade-off between the model complexity and the fitting ability. We need to find the largest $\beta$, we can also consider using MLE to find the optimal solution of $\beta$. We derive the optimal solution of $\beta$ by maximizing the likelihood function of $\beta$:
+
+$$\beta_{ML} = \arg\max_{\beta}\{-\frac{N}{2}\ln \beta - \frac{\beta}{2}\sum_{n=1}^{N}\{y(x_n, \textbf{w}_{ML}) - t_n\}^2\}$$
+
+Taking the derivative of the equation above, we have:
+\[ \frac{\partial}{\partial \beta} \left( -\frac{\beta}{2} \sum_{n=1}^N \{y(x_n, w) - t_n\}^2 + \frac{N}{2} \ln \beta \right) = 0 \]
+
+\[ -\frac{1}{2} \sum_{n=1}^N \{y(x_n, w) - t_n\}^2 + \frac{N}{2\beta} = 0 \]
+
+So we can find the optimal solution of $\beta$:
+
+$$\beta_{ML} = \frac{N}{\sum_{n=1}^{N}\{y(x_n, \textbf{w}_{ML}) - t_n\}^2}$$
 
