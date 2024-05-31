@@ -115,22 +115,84 @@ $$p(a \leq x \leq b) = P(b) - P(a)$$
  
 And it also have:
 
-$$
-\lim_{x \to -\infty}P(x) = 0\\
-\lim_{x \to +\infty}P(x) = 1\\
-$$
+$$\lim_{x \to -\infty}P(x) = 0$$
+
+$$\lim_{x \to +\infty}P(x) = 1$$
 
 ### 1.2.2 Expectations and Covariances
 
 The expectation and variance of a function $f(x)$ with respect to the probability distribution $p(x)$ are defined as:
 
-$$
-E[f] = \int f(x)p(x)dx\\
-E[f] \approx \frac{1}{N}\sum_{n=1}^{N}f(x_n)
-$$
+$$E[f] = \int f(x)p(x)dx $$
+
+$$E[f] \approx \frac{1}{N}\sum_{n=1}^{N}f(x_n)$$
 
 $$var[f] = E[(f(x) - E[f(x)])^2] = E[f(x)^2] - E[f(x)]^2$$
 
-Expectation is the value to measure the center of the distribution. And variance is the value to measure the spread of the distribution. And the covariance between two functions $f(x)$ and $g(x)$ is defined as:
+Expectation is the value to measure the center of the distribution. And variance is the value to measure the spread of the distribution. And the covariance between two variables $x$ and $y$ is defined as:
 
-$$cov[f, g] = E[(f(x) - E[f(x)])(g(x) - E[g(x)])] = E[f(x)g(x)] - E[f(x)]E[g(x)]$$
+$$cov[x, y] = E[(x - E[x])(y - E[y])] = E[xy] - E[x]E[y]$$
+
+Which is a measure of the degree to which $x$ and $y$ vary together. If $x$ and $y$ are independent, then $cov[x, y] = 0$. And the covariance matrix(for vectors of varibles) is defined as:
+
+$$cov[\textbf{x}] = E[(\textbf{x} - E[\textbf{x}])(\textbf{x} - E[\textbf{x}])^T]$$
+
+Obviously, accoding to the definition of covariance matrix, it is a symmetric matrix. And the diagonal elements of the covariance matrix are the variances of the corresponding variables. And the off-diagonal elements are the covariances between the corresponding variables. For the vector $\textbf{x} = [x_1, x_2, ..., x_D]^T$, the covariance matrix is a $\mathbb{M} = D \times D$ matrix. And $\mathbb{M}_{i,j}$ is the covariance between $x_i$ and $x_j$ which is the same as $\mathbb{M}_{j,i}$. The calculation of the covariance matrix is:
+
+$$\mathbb{M}_{i,j} = \frac{1}{N}\sum_{n=1}^{N}(x_{i,n} - \bar{x}_i)(x_{j,n} - \bar{x}_j)$$
+
+where $\bar{x}_i$ is the mean of the variable $x_i$. 
+
+### 1.2.3 Bayesian Probability Theory
+
+Modern machine learning and pattern recognition are based on the Bayesian probability theory. The Bayesian probability theory is a way to quantify uncertainty. It is a way to measure the degree of belief in a hypothesis. The Bayesian probability theory is based on the Bayes' theorem:
+
+$$p(\textbf{w}|D, M) = \frac{p(D|\textbf{w}, M)p(\textbf{w}|M)}{p(D|M)}$$
+
+where $p(\textbf{w}|D, M)$ is the posterior distribution, $p(D|\textbf{w}, M)$ is the likelihood function, $p(\textbf{w}|M)$ is the prior distribution, and $p(D|M)$ is the evidence. The posterior distribution is the distribution of the parameters $\textbf{w}$ given the data $D$ and the model $M$. The likelihood function is the probability of the data given the parameters and the model. The prior distribution is the distribution of the parameters before observing the data. The evidence is the probability of the data given the model. The Bayesian probability theory is a way to update the prior distribution to the posterior distribution based on the data. It is a way to quantify the uncertainty of the parameters.
+
+Let's consider the polynomial curve fitting problem. We have the data $D = \{(x_1, t_1), (x_2, t_2), ..., (x_N, t_N)\}$, and the model $M$ is the polynomial model of order $M$. The coifficients of the polynomial model are the parameters $\textbf{w} = \{w_0, w_1, ..., w_M\}$. 
+
+The core of the Bayesian probability theory is the posterior distribution. And we will use the equation above to use prior distribution to calculate posterior distribution. Before we observe the data, the prior distribution is the distribution of the coifficients, denoted as $p(\textbf{w}|M)$. And after we observe the data, the posterior distribution is the distribution of the coifficients, denoted as $p(\textbf{w}|D, M)$. The likelihood function is the probability of the data given the parameters and the model, denoted as $p(D|\textbf{w}, M)$. The evidence is the probability of the data given the model, denoted as $p(D|M)$.
+
+The likelihood function is the probability of the data given the parameters and the model:
+
+$$p(D|\textbf{w}, M) = \prod_{n=1}^{N}p(t_n|x_n, \textbf{w}, M)$$
+
+where $p(t_n|x_n, \textbf{w}, M)$ is the probability of the target value $t_n$ given the input value $x_n$, the parameters $\textbf{w}$, and the model $M$. 
+
+So given the definition of the likelihood function, we can state Bayes' theorem in words:
+
+$$\text{posterior} \propto \text{likelihood} \times \text{prior}$$
+
+It is hard to understand the meaning of $p(D|\textbf{w}, M)$ which is called likelihood function. Before I thought that the likelihood is meaningless because since the coiffient $\textbf{w}$ is determined, the likelihood is a binary value. I ignore that the problem is we can not determine the coiffient $\textbf{w}$, so the $\textbf{w}$ is a random varible too. So we can consider the polynomial fitting problem in possibility. The $\textbf{w}$ is a random varible in the $M$ order space, it's a joint distribution of $M$ variable $w_1,w_2,\dots,w_M$. We need to maximize the likelihood function which is maximize the possibility to calculate the value $t_n$ for given input $x_n$. And it will obviously has the minimized error. 
+
+### 1.2.4 The Gaussian Distribution
+
+Gaussian distribution is the most important distribution in probability theory. It is a bell-shaped curve. The Gaussian distribution is defined as:
+
+$$\mathcal{N}(x|\mu, \sigma^2) = \frac{1}{(2\pi\sigma^2)^{1/2}}\exp\{-\frac{1}{2\sigma^2}(x - \mu)^2\}$$
+
+where $\mu$ is the mean of the distribution, and $\sigma^2$ is the variance of the distribution. 
+
+The vector $x$ is a $D$-dimensional vector, and the Gaussian distribution is defined as:
+
+$$\mathcal{N}(\textbf{x}|\textbf{μ}, \mathbb{Σ}) = \frac{1}{(2\pi)^{D/2}}\frac{1}{|\mathbb{Σ}|^{1/2}}\exp\{-\frac{1}{2}(\textbf{x} - \textbf{μ})^T\mathbb{Σ}^{-1}(\textbf{x} - \textbf{μ})\}$$
+
+where $\textbf{μ}$ is the mean vector, and $\mathbb{Σ}$ is the covariance matrix.
+
+And if each dimension of vector $\textbf{x}$ has the same expectation and variance the possibility of the data given the Gaussian distribution is:
+
+$$p(\textbf{x}|μ, \sigma^2) = \prod_{i=1}^{D}\mathcal{N}(x_i|\mu, \sigma^2)$$
+
+And the log form of the possibility is:
+
+$$\ln p(\textbf{x}|μ, \sigma^2) = -\frac{1}{2\sigma^2}\sum_{i=1}^{D}(x_i - μ)^2 - \frac{D}{2}\ln(2\pi\sigma^2)$$
+
+Back to the polynomial curve fitting problem, if we use maximize likelihood methods to solve the problem, there will be bias.
+
+**Unbias Estimation**: 
+
+
+
+
