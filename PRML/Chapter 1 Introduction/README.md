@@ -61,5 +61,76 @@ And the figure above shows different $\lambda$ and the corresponding coefficient
 
 Another methods to prevent overfitting is to add more training data. As the figure below shows, if we add more training data, the RMS error on the test data will decrease. Another way to say this is that the larger the training data, the better the generalization ability of the model.
 
+## 1.2 Probability Theory
+
+![alt text](fig/image6.png)
+
+**Sum rule**: $$p(X = x_i) = \sum_{j}p(X = x_i, Y = y_j) = \frac{c_i}{N}$$
+
+Conditional probability: $$p(X = x_i|Y = y_j) =  \frac{n_{i,j}}{c_i}=\frac{p(X = x_i, Y = y_j)}{p(Y = y_j)}$$
+
+In conditional probability, $n_{i,j}$ is the number of times $X = x_i$ and $Y = y_j$ occur together, and $c_i$ is the number of times $X = x_i$ occurs. We can say that the core of conditional probability is shrink the sample space. The original sample space is $N$ while the new sample space is $c_i$. And based on it, we can give the equation of conditional probability as above. 
+
+And we can change the equation of conditional probability to the form of joint probability:
+
+$$p(X = x_i, Y = y_j) =\frac{n_{i,j}}{N}=\frac{n_{i,j}}{c_i} \times \frac{c_i}{N} =p(Y = y_j|X = x_i)p(Y = x_i)$$
+
+The equation above is also called product rule. It is the core of probability theory. It is the foundation of the Bayes' theorem.
+
+And we can also get the Bayes' theorem from the product rule:
+
+$$p(Y = y_j|X = x_i) = \frac{p(X = x_i|Y = y_j)p(Y = y_j)}{p(X = x_i)}$$
+
+### 1.2.1 Probability densities
+
+We call $p(x)$ the probability density function of the continuous variable $x$. And the probability that $x$ lies in the range $[x, x + \delta x]$ is given by $p(x)\delta x$. And the probability that $x$ lies in the range $[x, x + \delta x]$ and $y$ lies in the range $[y, y + \delta y]$ is given by $p(x, y)\delta x \delta y$. So for the single variable, if we need to calculate the probability that $x$ lies in the range $[a, b]$, we can use the following equation:
+
+$$p(a \leq x \leq b) = \int_{a}^{b}p(x)dx$$
+
+And for the joint probability, we can use the following equation:
+
+$$p(a \leq x \leq b, c \leq y \leq d) = \int_{a}^{b}\int_{c}^{d}p(x, y)dxdy$$
+
+If we need to calculate the probability that $x$ lies in the range $[a, b]$, and y lies in the range $[-\infty, +\infty]$, we can use the following equation:
+
+$$p(a \leq x \leq b) = \int_{a}^{b}\int_{-\infty}^{+\infty}p(x, y)dydx$$
 
 
+And if the variable $x$ is non-linearly transformed by $y$,which means $x=g(y)$, we can get the following equation:
+
+$$
+p(y) = p(x)\left|\frac{dx}{dy}\right| = p(g(y))\left|\frac{dg(y)}{dy}\right|
+$$
+
+The equation above is the transformation of the probability density function. And the absolute value of the derivative of the transformation function is the Jacobian of the transformation. It will make sure the probability is conserved and non-negative.
+
+
+This is the PDF(Probability Density Function) of the continuous variable. And the CDF(Cumulative Distribution Function) is the integral of the PDF. The CDF of the continuous variable $x$ is defined as:
+
+$$P(x) = \int_{-\infty}^{x}p(x')dx'$$
+
+Obviously, the CDF is a monotonically increasing function. And the PDF is the derivative of the CDF. So we can get the PDF from the CDF. And if we need to calculate the probability that $x$ lies in the range $[a, b]$, we can use the following equation:
+
+$$p(a \leq x \leq b) = P(b) - P(a)$$
+ 
+And it also have:
+
+$$
+\lim_{x \to -\infty}P(x) = 0\\
+\lim_{x \to +\infty}P(x) = 1\\
+$$
+
+### 1.2.2 Expectations and Covariances
+
+The expectation and variance of a function $f(x)$ with respect to the probability distribution $p(x)$ are defined as:
+
+$$
+E[f] = \int f(x)p(x)dx\\
+E[f] \approx \frac{1}{N}\sum_{n=1}^{N}f(x_n)
+$$
+
+$$var[f] = E[(f(x) - E[f(x)])^2] = E[f(x)^2] - E[f(x)]^2$$
+
+Expectation is the value to measure the center of the distribution. And variance is the value to measure the spread of the distribution. And the covariance between two functions $f(x)$ and $g(x)$ is defined as:
+
+$$cov[f, g] = E[(f(x) - E[f(x)])(g(x) - E[g(x)])] = E[f(x)g(x)] - E[f(x)]E[g(x)]$$
