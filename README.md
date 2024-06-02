@@ -4,7 +4,7 @@ To enhance my foundational knowledge for research, I plan to study the basics of
 
 - [ ]  [PRML](https://github.com/gerdm/prml): I have found a GitHub repository that contains notes and example code for PRML. I plan to use this repository to assist my study of PRML. I plan to complete one or two chapters per week for this book, which has 14 chapters in total, so I will finish it in three months. I will write code and derive the theories myself, documenting my progress in Markdown. I will upload my study progress to my GitHub repository.
 
-    - [ √ ]  Introduction [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/PRML/Chapter%201%20Introduction)
+    - [√]  Introduction [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/PRML/Chapter%201%20Introduction)
     - [ ]  Probability Distributions
     - [ ]  Linear Models for Regression
     - [ ]  Linear Models for Classification
@@ -39,7 +39,7 @@ To enhance my foundational knowledge for research, I plan to study the basics of
     - [ ]  An Introduction to Responsible NLP
 
 - [ ]  [EasyRL](https://datawhalechina.github.io/easy-rl/): Easy RL is a tutorial about Reinforcement Learning recommended by Prof. Yaodong Yang. This book includes 13 chapters. Unlike PRML and CS224N, Easy RL has fewer coding tasks but more theory. Therefore, I will focus on the theoretical proof of each algorithm. I will also complete at least one chapter per week.
-    - [ ]  Foundamental of Reinforcement
+    - [√]  Foundamental of Reinforcement [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/EasyRL/Chapter%201%20Foundamental%20of%20Reinforcement%20Learning)
     - [ ]  MDP
     - [ ]  Table Methods
     - [ ]  Policy Gradient
