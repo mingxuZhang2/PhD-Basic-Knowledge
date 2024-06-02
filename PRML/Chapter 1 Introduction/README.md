@@ -242,7 +242,7 @@ So we can find the optimal solution of $\beta$:
 
 $$\beta_{ML} = \frac{N}{\sum_{n=1}^{N}\{y(x_n, \textbf{w}_{ML}) - t_n\}^2}$$
 
-### 1.3 Model Selection
+## 1.3 Model Selection
 
 Model Selection is aim to find a best model during training process. We know that there will be much epochs during training and so we have many checkpoints. How to select the best model among thest checkpoints become a important problem. One potential solution is using validated set to testing the model and choose the best one according some metrics such as loss(for regression) or accuracy(for classification). But since the data is valuable, we can not spilt too much data into validated set so there must be some estimation error. It may not represent the real situation. So we need to find a best way to trade off the amount of data in validated set and quality of validation. 
 
@@ -251,7 +251,7 @@ $K$-fold cross validation is a good way to solve this problem. We can split the 
 This method has a shortcoming, we need to find the best parameter $K$ which is the trade-off between the amount of data in validated set and the quality of validation. And the $K$-fold cross validation is time-consuming.
 
 
-### 1.4 The Curse of Dimensionality
+## 1.4 The Curse of Dimensionality
 
 Previous, we talk about curve fitting problem. The input data is only a single variable. But in the real world, the input data is a vector. So the input data is a high-dimensional vector. The main difference between vector and single variable is the amount of dimensions.
 
@@ -268,11 +268,11 @@ When we deal with the high-dimension data, we meet a problem that since we live 
 And the high-dimension space may very sparse, let's consider the three-dimensional space we live. Assume there is a ball with radius $r$ in the three-dimensional space. The volume of the ball is $V = \frac{4}{3}\pi r^3$. The more you near to the surface of the ball, the bigger volume you will get. So there is a very high density near the surface rather than the center.
 
 
-### 1.5 Decision Theory
+## 1.5 Decision Theory
 
 Decision making is a obvious process. If we understand the possibility, we will quickly know the princeple of decision making. For classification tasks, decision making is that we need a rule to assign each input value $\textbf{x}$ to a class $C_k$. Such a rule divides the input space into regions $R_k$ called decision regions. 
 
-#### 1.5.1 Minimizing the misclassification rate
+### 1.5.1 Minimizing the misclassification rate
 
 In classification tasks, we need to minimize the probability of misclassification. The probability of misclassification is:
 
@@ -295,7 +295,7 @@ $$\text{Assign } \textbf{x} \text{ to class } C_k \text{ if } \sum_{j}L_{kj}p(C_
 where $L_{kj}$ is the element of the loss matrix. In fact, I believe it is a just weighted sum of the posterior probability of class $C_k$. But it is a trade off between the cost of misclassification and the cost of correct classification. Sometimes we need to avoid the high cost if misclassification class $C_i$ to $C_j$, so we will rather to assign the input value $\textbf{x}$ to class $C_i$.
 
 
-#### 1.5.2 Minimizing the expected loss
+### 1.5.2 Minimizing the expected loss
 
 Similar to the loss matrix, the expected loss is a way to quantify the cost of misclassification. The expected loss is the expectation of the loss function:
 
@@ -307,4 +307,166 @@ So the question become how to minimize the expected loss. The decision rule is:
 
 $$\text{Assign } \textbf{x} \text{ to class } C_k \text{ if } \sum_{j}L_{kj}p(C_j|\textbf{x}) < \sum_{j}L_{jj}p(C_j|\textbf{x})$$
 
-where $L_{kj}$ is the element of the loss matrix. The decision rule is the same as the loss matrix
+where $L_{kj}$ is the element of the loss matrix. The decision rule is the same as the loss matrix.
+
+### 1.5.3 The reject option
+
+![alt text](fig/image10.png)
+
+The image above shows reject region. We know that the misclassification error is due to the posterior probability of class $C_k$. If we set a threshold $\theta$, we can reject the input value $\textbf{x}$ if the posterior probability of class $C_k$ is less than the threshold $\theta$. The reject option is a way to reduce the misclassification error. Only the posterior probability of class $C_k$ is greater than the threshold $\theta$, we will assign the input value $\textbf{x}$ to class $C_k$. Otherwise, we will reject the input value $\textbf{x}$ and leave the decision to the human. The reject option is a way to reduce the misclassification error. So now the decision rule is:
+
+$$\text{Assign } \textbf{x} \text{ to class } C_k \text{ if } \sum_{j}L_{kj}p(C_j|\textbf{x}) < \sum_{j}L_{jj}p(C_j|\textbf{x}) \text{ and } p(C_k|\textbf{x}) > \theta$$
+
+where $\theta$ is the threshold. The decision rule is the same as the loss matrix. But we add a threshold $\theta$ to reduce the misclassification error.
+
+### 1.5.4 Inference and decision
+
+We have broken the classification problem into two parts, inference and decision. Inference is the process of estimating the posterior probability of class $C_k$ given the input value $\textbf{x}$. Decision is the process of assigning the input value $\textbf{x}$ to class $C_k$. So if we need to do classification tasks, we need two stage. What if we combine the two stage into one? Which means we need to learn a single function $f$ that maps the input value $\textbf{x}$ to the class $C_k$. Such a function is called discriminant function. There are three ways to do classification task.
+
+1. **Generative modeling**: We need to estimate the class-conditional density $p(\textbf{x}|C_k)$ and the prior probability $p(C_k)$. Then we can use the Bayes' theorem to calculate the posterior probability $p(C_k|\textbf{x})$.
+
+$$f(\textbf{x}) = p(C_k|\textbf{x})$$
+
+$$ p(C_k|\textbf{x}) = \frac{p(\textbf{x}|C_k)p(C_k)}{p(\textbf{x})}$$
+
+$$ p(\textbf{x}) = \sum_{j}p(\textbf{x}|C_j)p(C_j)$$
+
+In fact, we explicitly or implicitly learn the joint distribution of the input value $\textbf{x}$ and the class $C_k$. And we use the Bayes' theorem to calculate the posterior probability of class $C_k$ given. This modeling process is called generative modeling. 
+
+2. **Discriminative modeling**: We need to learn the posterior probability $p(C_k|\textbf{x})$ directly. And then use decision rule to assign the input value $\textbf{x}$ to class $C_k$.
+
+3. **Discriminant function**: We need to learn a single function $f$ that maps the input value $\textbf{x}$ to the class $C_k$. For example, if we need to do binary classification, we can learn a function $f$ that maps the input value $\textbf{x}$ to the class $C_1$ or $C_2$. The decision rule is:
+
+$$\text{Assign } \textbf{x} \text{ to class } C_1 \text{ if } f(\textbf{x}) = 1$$
+
+$$\text{Assign } \textbf{x} \text{ to class } C_2 \text{ if } f(\textbf{x}) = 0$$
+
+For generative modeling and discriminative modeling, there is difference: Even if they all need to calculate the posterior probability of class $C_k$ given the input value $\textbf{x}$, the generative modeling need to calculate the class-conditional density $p(\textbf{x}|C_k)$ and the prior probability $p(C_k)$, while the discriminative modeling need to learn the posterior probability $p(C_k|\textbf{x})$ directly(May use SVM, Regression etc.).
+
+## 1.6 Information Theory
+
+We need to know how to measure the amount of information. We can say that if we can measure the amount of information by the "degree of surprise". If the event is very likely to happen, the amount of information is very small. If the event is very unlikely to happen, the amount of information is very large which means we have learnt something that we do not know before.
+
+Thus, the amount of information is depended on the possibility of the event. The more likely the event is, the less information we will get. The less likely the event is, the more information we will get. Let's consider a function $h(.)$ that measures the amount of information. If we have two event $x_1$ and $x_2$, the amount of information of the event $x_1$ is $h(x_1)$, and the amount of information of the event $x_2$ is $h(x_2)$. If the two events are independent, the amount of information of the two events is the sum of the amount of information of the two events:
+
+$$h(x_1, x_2) = h(x_1) + h(x_2)$$
+
+And since the events are independent, the possibility of the two events is the product of the possibility of the two events:
+
+$$p(x_1, x_2) = p(x_1)p(x_2)$$
+
+So $h(x)$ should be given by the logarithm of the probability of the event $x$:
+
+$$h(x) = -\log p(x)$$
+
+The negative assign is to make sure the amount of information is non-negative. In transmitting the information, since all of the data is stored by the binary code, the amount of information is measured by the bit. This is the reason why the logarithm is base 2. Then we can define the entropy of the event $x$ as the expectation of the amount of information:
+
+$$H[x] = -\sum_x p(x)\log p(x)$$
+
+It can be seen as the quantity of the uncertainty. The smaller the entropy, the less uncertainty. The larger the entropy, the more uncertainty. The maximum entropy is when the possibility of the event is uniform which means we don't know anything about the event. The minimum entropy is when the possibility of the event is 1 which means we know everything about the event.
+
+If the variable is continuous, the entropy is defined as:
+
+$$H[x] = -\int p(x)\log p(x)dx$$
+
+Since we know：
+
+$$ \int p(x)dx = 1 $$
+
+$$ \int x p(x)dx = E[x] = \mu $$
+
+$$ \int (x-\mu)^2 p(x)dx = E[(x-\mu)^2] = \sigma^2 $$
+
+So we can set these three equations as constraints to maximize the entropy. The Lagrange function is:
+
+$$ L = -\int p(x)\log p(x)dx + \lambda_1(\int p(x)dx - 1) + \lambda_2(\int xp(x)dx - \mu) + \lambda_3(\int (x-\mu)^2 p(x)dx - \sigma^2) $$
+
+Taking the derivative of the Lagrange function, we have:
+
+$$ \frac{\partial L}{\partial p(x)} = -\log p(x) - 1 + \lambda_1 + \lambda_2 x + \lambda_3(x-\mu)^2 = 0 $$
+
+So we can get the optimal solution of $p(x)$:
+
+$$ p(x) = \exp\{-1 + \lambda_1 + \lambda_2 x + \lambda_3(x-\mu)^2\} $$
+
+And we can get the optimal solution of $\lambda_1$, $\lambda_2$, and $\lambda_3$ by the constraints and the final solution of $p(x)$ is:
+
+$$ p(x) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\{-\frac{(x-\mu)^2}{2\sigma^2}\} $$
+
+Which is the Gaussian distribution. The Gaussian distribution is the distribution that maximizes the entropy. And the entropy of the Gaussian distribution is:
+
+$$ H[x] = \frac{1}{2}\ln 2\pi e\sigma^2 $$
+
+Suppose we have joint distribution $p(x, y)$, the entropy of the joint distribution is:
+
+$$ H[y|x] = -\sum_{x, y}p(x, y)\log p(y|x) = - \int \int p(x, y)\log p(y|x)dxdy $$
+
+$$ H[x, y] = -\sum_{x, y}p(x, y)\log p(x, y) = \int \int p(x, y)\log p(x, y)dxdy $$
+
+$$ H[x, y] = -\sum_{x, y}p(x, y)\log p(x|y)p(y) = -\int \int p(x, y)\log p(x|y)dxdy - \int \int p(x, y)\log p(y)dxdy $$
+
+$$ H[x, y] = H[y|x] + H[y] $$
+
+### 1.6.1 Relative entropy and mutual information
+
+Consider we have modelled a distribution $q(x)$ to approximate the true distribution $p(x)$. If we use $q(x)$ to transmit the information of the event $x$, we need some addtional bits to transmit the information. The additional bits is the relative entropy between the two distributions:
+
+$$ D_{KL}(p||q) = \sum_x p(x)\log \frac{p(x)}{q(x)} = -\sum_x p(x)\log q(x) + \sum_x p(x)\log p(x) $$  
+
+This term is called the Kullback-Leibler divergence. It is a way to measure the difference between the two distributions. Note that it is not a symmetrical quantity, which means $ D_{KL}(p||q) \neq D_{KL}(q||p) $. 
+
+A function is convex if for any $x \in [a,b]$ and $0 \leq \lambda \leq 1$, we have:
+
+$$ f(\lambda a + (1-\lambda)b) \leq \lambda f(a) + (1-\lambda)f(b) $$
+
+![alt text](fig/image11.png)
+
+And if the function has a opposite properties, we call it is concave. And if $f(x)$ is convex, $-f(x)$ is concave.
+
+A convex function will satisfy:
+
+$$ f(\sum_i \lambda_i x_i) \leq \sum_i \lambda_i f(x_i) $$
+
+where $0 \leq \lambda_i \leq 1$ and $\sum_i \lambda_i = 1$. If we consider \sum_i \lambda_i = 1 as the probability, the convex function will satisfy:
+
+$$ f(\sum_i p_i x_i) \leq \sum_i p_i f(x_i) $$
+
+where $0 \leq p_i \leq 1$ and $\sum_i p_i = 1$. 
+
+$$ f(\int xp(x)dx) \leq \int f(x)p(x)dx $$
+
+We can put the equation above to the KL-divergence and we have:
+
+$$ D_{KL}(p||q) = -\int p(x) \log { \frac{q(x)}{p(x)} }dx \geq -\log \int q(x)dx = 0 $$
+
+Consider if we wish to model a unknown distribution $p(x)$, and we try to apporximate it by a distribution $q(x,\theta)$, where $\theta$ is the parameters. One way to find the optimal solution of $\theta$ is to minimize the KL-divergence between the two distributions. The optimal solution of $\theta$ is:
+
+$$ \theta^* = \arg\min_{\theta} D_{KL}(p||q) $$
+
+The KL-divergence is:
+
+$$ D_{KL}(p||q) = -\int p(x) \log q(x,\theta)dx + \int p(x) \log p(x)dx = \sum_x p(x) \log p(x) - \sum_x p(x) \log q(x,\theta) $$
+
+It is hard to calculate the KL-divergence directly because we need to know the true distribution $p(x)$. But we can observe a finite set of data $\{x_1, x_2, ..., x_N\}$ from the true distribution $p(x)$. So we can use the empirical distribution $\hat{p}(x)$ to approximate the true distribution $p(x)$. So the KL-divergence is:
+
+$$ D_{KL}(p||q) = \sum_x \{ -\ln q(x_i,\theta) + \ln \hat{p}(x_i) \} $$
+
+We want to minimize the KL-divergence, we can see that the second term is a constant. So we can minimize the first term. The first term is the negative log-likelihood function. So we can minimize the KL-divergence by maximizing the likelihood function. So the optimal solution of $\theta$ is:
+
+$$ \theta^* = \arg\max_{\theta} \sum_{n=1}^{N} \ln q(x_n, \theta) $$
+
+Let's consider the joint distribution $p(x, y)$, if the two variables are independent, the joint distribution is the product of the two marginal distribution:
+
+$$ p(x, y) = p(x)p(y) $$
+
+If the two variables are not independent, we want to see how "close" they are. We can use the KL-divergence to measure the difference between the joint distribution and the product of the two marginal distribution:
+
+$$ I[x, y] = D_{KL}(p(x, y)||p(x)p(y)) = \sum_{x, y} p(x, y) \log \frac{p(x, y)}{p(x)p(y)} = - \int \int p(x, y) \log \frac{p(x)p(y)}{p(x,y)}dxdy $$
+
+which is called the **mutual information**. The mutual information is a way to measure the dependence between the two variables. If the two variables are independent, the mutual information is zero. If the two variables are dependent, the mutual information is positive. 
+
+It is calculated by the KL-divergence:
+
+$$ I[x, y] = H[x] - H[x|y] = H[y] - H[y|x] $$
+
+So we can consider mutual information as the reduction of uncertainty. If we know the value of the variable $y$, the uncertainty of the variable $x$ is reduced by the mutual information. For Bayesian probability, $p(x)$ is prior distribution, and $p(x|y)$ is posterior distribution. The mutual information is the reduction of uncertainty.
