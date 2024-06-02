@@ -234,11 +234,77 @@ We know that $\beta$ is the precision parameter of the Gaussian distribution, wh
 $$\beta_{ML} = \arg\max_{\beta}\{-\frac{N}{2}\ln \beta - \frac{\beta}{2}\sum_{n=1}^{N}\{y(x_n, \textbf{w}_{ML}) - t_n\}^2\}$$
 
 Taking the derivative of the equation above, we have:
-\[ \frac{\partial}{\partial \beta} \left( -\frac{\beta}{2} \sum_{n=1}^N \{y(x_n, w) - t_n\}^2 + \frac{N}{2} \ln \beta \right) = 0 \]
+$$ \frac{\partial}{\partial \beta} \left( -\frac{\beta}{2} \sum_{n=1}^N \{y(x_n, w) - t_n\}^2 + \frac{N}{2} \ln \beta \right) = 0 $$
 
-\[ -\frac{1}{2} \sum_{n=1}^N \{y(x_n, w) - t_n\}^2 + \frac{N}{2\beta} = 0 \]
+$$ -\frac{1}{2} \sum_{n=1}^N \{y(x_n, w) - t_n\}^2 + \frac{N}{2\beta} = 0 $$
 
 So we can find the optimal solution of $\beta$:
 
 $$\beta_{ML} = \frac{N}{\sum_{n=1}^{N}\{y(x_n, \textbf{w}_{ML}) - t_n\}^2}$$
 
+### 1.3 Model Selection
+
+Model Selection is aim to find a best model during training process. We know that there will be much epochs during training and so we have many checkpoints. How to select the best model among thest checkpoints become a important problem. One potential solution is using validated set to testing the model and choose the best one according some metrics such as loss(for regression) or accuracy(for classification). But since the data is valuable, we can not spilt too much data into validated set so there must be some estimation error. It may not represent the real situation. So we need to find a best way to trade off the amount of data in validated set and quality of validation. 
+
+$K$-fold cross validation is a good way to solve this problem. We can split the data into $K$ parts and use $K-1$ parts to train the model and use the rest part to validate the model. And we can repeat this process $K$ times and get $K$ results. We can use the average of the $K$ results to evaluate the model.
+
+This method has a shortcoming, we need to find the best parameter $K$ which is the trade-off between the amount of data in validated set and the quality of validation. And the $K$-fold cross validation is time-consuming.
+
+
+### 1.4 The Curse of Dimensionality
+
+Previous, we talk about curve fitting problem. The input data is only a single variable. But in the real world, the input data is a vector. So the input data is a high-dimensional vector. The main difference between vector and single variable is the amount of dimensions.
+
+![alt text](fig/image8.png)
+
+The figure above shows different dimensions $D$ visualized by the unit cube. As we can see, the volume of the unit cube decreases as the dimension $D$ increases. Let's consider the polynomial curve fitting problem. What if the input is a vector? If the input dimension is $D = 3$, the polynomial model is:
+
+$$\begin{aligned}y(\mathbf{x},\mathbf{w})=w_0+\sum_{i=1}^Dw_ix_i+\sum_{i=1}^D\sum_{j=1}^Dw_{ij}x_ix_j+\sum_{i=1}^D\sum_{j=1}^D\sum_{k=1}^Dw_{ijk}x_ix_jx_k.\end{aligned}$$
+
+As $D$ increased, the independent terms of the polynomial model increased exponentially. The coiffient of the polynomial model is $O(D^M)$, which means the number of the coiffient is exponential to the dimension $D$. So the model complexity is exponential to the dimension $D$. 
+
+When we deal with the high-dimension data, we meet a problem that since we live in three-dimensional space, we can not imagine the high-dimension space. So we can not use the geometric intuition to understand the high-dimension space. 
+
+And the high-dimension space may very sparse, let's consider the three-dimensional space we live. Assume there is a ball with radius $r$ in the three-dimensional space. The volume of the ball is $V = \frac{4}{3}\pi r^3$. The more you near to the surface of the ball, the bigger volume you will get. So there is a very high density near the surface rather than the center.
+
+
+### 1.5 Decision Theory
+
+Decision making is a obvious process. If we understand the possibility, we will quickly know the princeple of decision making. For classification tasks, decision making is that we need a rule to assign each input value $\textbf{x}$ to a class $C_k$. Such a rule divides the input space into regions $R_k$ called decision regions. 
+
+#### 1.5.1 Minimizing the misclassification rate
+
+In classification tasks, we need to minimize the probability of misclassification. The probability of misclassification is:
+
+$$p(mistake) = \sum_{k=1}^{K}p(C_k)\int_{R_k}p(x|C_k)dx$$
+
+where $p(C_k)$ is the prior probability of class $C_k$, $p(x|C_k)$ is the likelihood function of class $C_k$, and $R_k$ is the decision region of class $C_k$. 
+
+So if we want to minimize the probability of misclassification, we need to consider the value $p(x|C_k)p(C_k)$ which is the posterior probability of class $C_k$. The decision rule is:
+
+$$\text{Assign } \textbf{x} \text{ to class } C_k \text{ if } p(C_k|\textbf{x}) > p(C_j|\textbf{x}) \text{ for all } j \neq k$$
+
+![alt text](fig/image9.png)
+
+The image above shows the decision regions of two classes, $C_1$ and $C_2$. $\hat{x}$ is the decision boundary. If $x_0$ is in the region $R_1$, we assign the input value $\textbf{x}$ to class $C_1$. If $x_0$ is in the region $R_2$, we assign the input value $\textbf{x}$ to class $C_2$. We can see that is we change the decision boundary, the error will change too. The error consists of two parts, the error of the region $R_1$ and the error of the region $R_2$ which is green, red and blue area in the image above. The decision boundary is the trade-off between the error of the region $R_1$ and the error of the region $R_2$. The sum of green one and blue one is constant, but we can change the red one. If we set $x_0 = \hat{x}$, the error will be minimized. Then we will use the minimize error possibility to assign the input value $\textbf{x}$ to class $C_k$.
+
+And for "Loss martix", it is a matrix to measure the cost of misclassification. The diagonal elements of the loss matrix are the cost of correct classification. The off-diagonal elements are the cost of misclassification. The loss matrix is a way to quantify the cost of misclassification. The loss matrix is a way to quantify the cost of misclassification. So if we use this martix to do decision making, the decision rule is:
+
+$$\text{Assign } \textbf{x} \text{ to class } C_k \text{ if } \sum_{j}L_{kj}p(C_j|\textbf{x}) < \sum_{j}L_{jj}p(C_j|\textbf{x})$$
+
+where $L_{kj}$ is the element of the loss matrix. In fact, I believe it is a just weighted sum of the posterior probability of class $C_k$. But it is a trade off between the cost of misclassification and the cost of correct classification. Sometimes we need to avoid the high cost if misclassification class $C_i$ to $C_j$, so we will rather to assign the input value $\textbf{x}$ to class $C_i$.
+
+
+#### 1.5.2 Minimizing the expected loss
+
+Similar to the loss matrix, the expected loss is a way to quantify the cost of misclassification. The expected loss is the expectation of the loss function:
+
+$$\text{Expected loss} = \int \int L(C_k, \hat{C}|\textbf{x})p(\textbf{x}, C_k)d\textbf{x}dC_k$$
+
+where $L(C_k, \hat{C}|\textbf{x})$ is the loss function, $\hat{C}$ is the predicted class, and $C_k$ is the true class. The expected loss is the expectation of the loss function.
+
+So the question become how to minimize the expected loss. The decision rule is:
+
+$$\text{Assign } \textbf{x} \text{ to class } C_k \text{ if } \sum_{j}L_{kj}p(C_j|\textbf{x}) < \sum_{j}L_{jj}p(C_j|\textbf{x})$$
+
+where $L_{kj}$ is the element of the loss matrix. The decision rule is the same as the loss matrix
