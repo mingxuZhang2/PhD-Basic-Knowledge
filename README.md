@@ -20,7 +20,7 @@ To enhance my foundational knowledge for research, I plan to study the basics of
     - [ ]  Combining Models
 
 - [ ]  [CS224N(For NLP Technique)](https://web.stanford.edu/class/cs224n/index.html#schedule): CS224N-2024 Spring is taught by Stanford. The course covers NLP techniques, including LLM, RLHF, DPO, and more. The problem is that there are no available teaching videos right now; only the 2023 course materials are accessible. Therefore, I will start by learning from the slides. CS224N includes tutorials and assignments. There are four assignments, and I will complete these assignments and take notes. I will complete at least one tutorial per week and upload my progress to my GitHub repository.
-    - [ ]  Word Vectors
+    - [√]  Word Vectors [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/CS224N/Chapter%201%20Word%20Vectors)
     - [ ]  Word Vectors and Language Models
     - [ ]  Backpropagation and Neural Network Basics
     - [ ]  Dependency Parsing
@@ -59,3 +59,4 @@ To enhance my foundational knowledge for research, I plan to study the basics of
 
 - [ ]  Paper Reading: Meanwhile, I think I need to read some classic papers, but I am not sure which ones to read yet. So this section remains to be discussed. I will read some LLM papers on weak-to-strong generalization and scalable oversight, which are related to my research. I will read at least three papers per week.
     - [ ]  [Weak-to-Strong Extrapolation Expedites Alignment](https://arxiv.org/abs/2404.16792)
+    - [ ]  [Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/pdf/1301.3781)
