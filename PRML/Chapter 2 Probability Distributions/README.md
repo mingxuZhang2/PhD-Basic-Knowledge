@@ -1,5 +1,8 @@
 # PRML Chapter 2: Probability Distributions
 
+
+Likelihood and probability: The probability of the data is when we know the parameters of the model, which means in the case of parameters $\theta$, the events $A$ occur which can denoted as $P(A|\theta)$. The likelihood of the parameters is the probability of the parameters when we know the data, which means in the case of data $D$, the parameters $\theta$ occur which can denoted as $P(\theta|D)$. The likelihood function is given by $P(D|\theta)$. We need to do MLE because MLE can find the parameters that maximize the likelihood function, which means the probability of the events $A$ occur is maximized.
+
 ## 2.1 Binary Variables
 
 Consider a binary variable $x \in \{0,1\}$ which $x=1$ respresents the head of a coin and $x=0$ represents the tail of a coin. The probability of the head of a coin is given by $P(x=1) = \mu$ and the probability of the tail of a coin is given by $P(x=0) = 1-\mu$. The probability of the binary variable $x$ can be written as:
@@ -81,3 +84,5 @@ $$
 ### 2.1.1 The Beta Distribution
 
 We have discussed above that if we only maximize the likelihood function, we may meet over-fitting problem. And the key to Bayesian theory is using prior probility to estimate the posterior probability. Previously, we only consider $\mu$ is a constant, we can regard $\mu$ as a random variable and use the prior probability $p(\mu)$ to estimate the posterior probability.
+
+Conjudacy prior distribution: If the prior distribution $p(\mu)$ has the same distribution form(e.g. both Gauss Distribution) as the posterior distribution $p(\mu|\mathcal{D})$, the prior distribution is called the conjudacy prior distribution of the likelihood function.
