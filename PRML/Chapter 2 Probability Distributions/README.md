@@ -180,3 +180,93 @@ $$
 So it means the posterior mean of $\theta$ is equal to the prior mean of $\theta$. So if we use MLE to estimate the parameter $\theta$, it is unbiased estimation.
 
 ## 2.2 Multinomial Variables
+
+In chapter 2.1, we consider a binary value $x \in \{0,1\}$ and the probability of the head of a coin is given by $\mu$. Now we consider a multinomial value $x \in \{1,2,\ldots,K\}$ and the probability of the $k$-th value is given by $\mu_k$. The probability of the multinomial value $x$ is given by:
+
+$$
+P(x|\mu) = \prod_{k=1}^{K} \mu_k^{x_k}
+$$
+
+where $\sum_{k=1}^{K} \mu_k = 1$. The distribution is called the multinomial distribution. The expected value of the multinomial distribution is given by:
+
+$$
+E[x_k] = \sum_{x_k=1}^{K} x_kP(x_k) = \mu_k
+$$
+
+And consider a data set $\mathcal{D} = \{x_1,x_2,\ldots,x_N\}$ where $x_i$ is a K-dimensional vector. The likelihood function of the data set $\mathcal{D}$ is given by:
+
+$$
+P(\mathcal{D}|\mu) = \prod_{n=1}^{N} \prod_{k=1}^{K} \mu_k^{x_{nk}} = \prod_{k=1}^{K} \mu_k^{(\sum_{n=1}^{N} x_{nk})} = \prod_{k=1}^{K} \mu_k^{m_k}
+$$
+
+where $m_k = \sum_{n=1}^{N} x_{nk}$ is the number of the $k$-th value in the data set and it represents the number of the $k$-th value occurs in the data set. The log likelihood function is given by:
+
+$$
+\ln P(\mathcal{D}|\mu) = \sum_{k=1}^{K} m_k \ln \mu_k
+$$
+
+And we have a constraints that $\sum_{k=1}^{K} \mu_k = 1$. We can use the Lagrange multiplier to solve the optimization problem. The Lagrange function is given by:
+
+$$
+L(\mu,\lambda) = \sum_{k=1}^{K} m_k \ln \mu_k + \lambda(\sum_{k=1}^{K} \mu_k - 1)
+$$
+
+Take the derivative of the Lagrange function with respect to $\mu_k$ and set it to zero:
+
+$$
+\frac{\partial L}{\partial \mu_k} = \frac{m_k}{\mu_k} + \lambda = 0
+$$
+
+And we can solve the above equation to get the maximum likelihood estimator of $\mu_k$:
+
+$$
+\mu_k = -\frac{m_k}{\lambda}
+$$
+
+What about the joint distribution of the multinomial distribution? The joint distribution of the multinomial distribution is given by:
+
+$$
+P(m_1,m_2,\dots,m_K|\mu) = \frac{N!}{\prod_{k=1}^{K} m_k!} \prod_{k=1}^{K} \mu_k^{m_k}
+$$
+
+where $N = \sum_{k=1}^{K} m_k$ is the total number of the data set. The joint distribution is a multinomial coefficient times the likelihood function. The multinomial coefficient is used to normalize the distribution, ensuring the integral of the distribution is 1. The expected value of the multinomial distribution is given by:
+
+$$
+E[m_k] = N\mu_k
+$$
+
+### 2.2.1 The Dirichlet Distribution
+
+Similar to the Beta distribution, we can use the Dirichlet distribution as the prior distribution of the multinomial distribution. The Dirichlet distribution is given by:
+
+$$
+Dir(\mu|\alpha) = \frac{\Gamma(\alpha_0)}{\prod_{k=1}^{K} \Gamma(\alpha_k)} \prod_{k=1}^{K} \mu_k^{\alpha_k - 1}
+$$
+
+where $\alpha = \{\alpha_1,\alpha_2,\ldots,\alpha_K\}$ is the parameter of the Dirichlet distribution and $\alpha_0 = \sum_{k=1}^{K} \alpha_k$. $\alpha_0$ is used to normalize the distribution, ensuring the integral of the distribution is 1.And the $\Gamma(x)$ is the gamma function which is given by:
+
+$$
+\Gamma(x) = \int_{0}^{\infty} u^{x-1}e^{-u}du
+$$
+
+![gamma function](/PRML/Chapter%202%20Probability%20Distributions/fig/image3.png)
+
+The image above shows the constraints over three variables $\mu_1,\mu_2,\mu_3$. We need to ensure the sum of the three variables is 1. So the bound is a 2-dimensional plane.
+
+Back to the question. Combine the likelihood function and the prior distribution that using Dirichlet distribution, we can get the posterior distribution of the multinomial distribution:
+
+$$
+P(\mu|\mathcal{D}) = Dir(\mu|\alpha + m) = \frac{\Gamma(\alpha_0 + N)}{\prod_{k=1}^{K} \Gamma(\alpha_k + m_k)} \prod_{k=1}^{K} \mu_k^{\alpha_k + m_k - 1}
+$$
+
+where $m = \{m_1,m_2,\ldots,m_K\}$ is the number of the $k$-th value in the data set.
+
+![different alpha](/PRML/Chapter%202%20Probability%20Distributions/fig/image4.png)
+
+
+The image above shows when $N=3$, the curve of Dirichlet distribution along with different $\alpha$. The first one $\alpha_k = 0.1$, the second one $\alpha_k = 1$, the third one $\alpha_k = 10$.
+
+And in fact, the beta distribution is a special case of the Dirichlet distribution when $K=2$.
+
+
+## 2.3 The Gaussian Distribution
