@@ -86,3 +86,97 @@ $$
 We have discussed above that if we only maximize the likelihood function, we may meet over-fitting problem. And the key to Bayesian theory is using prior probility to estimate the posterior probability. Previously, we only consider $\mu$ is a constant, we can regard $\mu$ as a random variable and use the prior probability $p(\mu)$ to estimate the posterior probability.
 
 Conjudacy prior distribution: If the prior distribution $p(\mu)$ has the same distribution form(e.g. both Gauss Distribution) as the posterior distribution $p(\mu|\mathcal{D})$, the prior distribution is called the conjudacy prior distribution of the likelihood function.
+
+Due to the prior distribution is random, we can choose any form of the prior distribution. We need to choose one that is easy to calculate for the posterior distribution. So we can choose the Beta distribution as the prior distribution of the Bernoulli distribution. The Beta distribution is given by:
+
+$$
+Beta(\mu|a,b) = \frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)}\mu^{a-1}(1-\mu)^{b-1}
+$$
+
+where $a$ and $b$ are the parameters of the Beta distribution, $\Gamma(x)$ is the gamma function which is given by:
+
+$$
+\Gamma(x) = \int_{0}^{\infty} u^{x-1}e^{-u}du
+$$
+
+The expected value of the Beta distribution is given by:
+
+$$
+E[\mu] = \frac{a}{a+b}
+$$
+
+The variance of the Beta distribution is given by:
+
+$$
+Var[\mu] = \frac{ab}{(a+b)^2(a+b+1)}
+$$
+
+In beta distrbution, the $\gamma$ function is used to normalized the distribution, ensuring the integral of the distribution is 1. For any $a$ and $b$, the integral of the Beta distribution is 1, so that:
+
+$$
+\int_{0}^{1} Beta(\mu|a,b)d\mu = 1
+$$
+
+![beta distribution](/PhD-Basic-Knowledge/PRML/Chapter%202%20Probability%20Distributions/fig/image1.png)
+
+
+The image above shows the curve in different hyperparameters. Let's back to the question. We need to choose the conjugate prior distribution of the Bernoulli distribution and we have already chosen the beta distribution. Consider how to calculate the posterior distribution of the Bernoulli distribution. The posterior distribution is given by:
+
+$$
+P(\mu|\mathcal{D}) = \frac{P(\mathcal{D}|\mu)P(\mu)}{P(\mathcal{D})}
+$$
+
+where $P(\mathcal{D})$ is the normalization factor. The posterior distribution is proportional to the product of the likelihood function and the prior distribution. And we know that $P(D)$ is a constant, so $P(\mu|\mathcal{D}) \propto P(\mathcal{D}|\mu)P(\mu)$. The likelihood function in Bernoulli distribution is given by:
+
+$$
+P(\mathcal{D}|\mu) = \prod_{n=1}^{N} \mu^{x_n}(1-\mu)^{1-x_n}
+$$
+
+Combine the likelihood function and the prior distribution, we can get the posterior distribution of the Bernoulli distribution:
+
+$$
+P(\mu|\mathcal{D}) \propto \mu^{\sum_{n=1}^{N} x_n + a - 1}(1-\mu)^{N - \sum_{n=1}^{N} x_n + b - 1}
+$$
+
+It is still a Beta distribution and only the parameters are changed. The posterior distribution is given by:
+
+$$
+P(\mu|\mathcal{D}) = Beta(\mu|\sum_{n=1}^{N} x_n + a, N - \sum_{n=1}^{N} x_n + b)
+$$
+
+The prior distribution is given by $Beta(\mu|a,b)$. As we can see that, after observing the data set, the parameters of the prior distribution are changed. The benefit of using the beta distribution is the prior distribution and posterior distribution remain the same form. And when we calculate the expectation and variance of the posterior distribution, we can avoid the complex integral calculation and use the formula of the expectation and variance of the beta distribution.
+
+![difference before and after ovserving](/PhD-Basic-Knowledge/PRML/Chapter%202%20Probability%20Distributions/fig/image2.png)
+
+The image above shows the difference before and after observing the dataset. We have a prior distritbution and after we observe the dataset(likelihood function), the posterior distritbution changed. In the figure, we can see that the likelihood function is increased as $\mu$ increases. As the result, the posterior distribution is also increased compared with prior distribution along with the same value of $\mu$. At the same time, the over-fitting problem is also avoid in some degree, the posterior distribution is moew smooth than the likelihood function.
+
+Let's have a more general discussion. The Machine Learning is aimed to update the parameter $\theta$ when observing the dataset $\mathcal{D}$ in different batches which can be formulated as a joint distribution $p(\theta,\mathcal{D})$. We have:
+
+$$\mathbb{E}_\theta[\theta] = \mathbb{E}_\mathcal{D}[\mathbb{E}[\theta|\mathcal{D}]]$$
+
+Because:
+
+
+$$
+\mathbb{E}_\theta[\theta] = \int \theta p(\theta)d\theta
+$$
+
+$$ 
+\mathbb{E}_\mathcal{D}[\mathbb{E}[\theta|\mathcal{D}]] = \int \left \{ \int \theta p(\theta|\mathcal{D})d\theta\right \} p(\mathcal{D}) d\mathcal{D}
+$$
+
+$$
+= \int \theta \left \{ \int  p(\theta,\mathcal{D}) d\mathcal{D}\right \} d\theta
+$$
+
+$$
+= \int \theta p(\theta)d\theta
+$$
+
+$$
+= \mathbb{E}_\theta[\theta]
+$$
+
+So it means the posterior mean of $\theta$ is equal to the prior mean of $\theta$. So if we use MLE to estimate the parameter $\theta$, it is unbiased estimation.
+
+## 2.2 Multinomial Variables
