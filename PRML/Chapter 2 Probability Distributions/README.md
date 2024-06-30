@@ -117,7 +117,7 @@ $$
 \int_{0}^{1} Beta(\mu|a,b)d\mu = 1
 $$
 
-![beta distribution](/PhD-Basic-Knowledge/PRML/Chapter%202%20Probability%20Distributions/fig/image1.png)
+![beta distribution](/PRML/Chapter%202%20Probability%20Distributions/fig/image1.png)
 
 
 The image above shows the curve in different hyperparameters. Let's back to the question. We need to choose the conjugate prior distribution of the Bernoulli distribution and we have already chosen the beta distribution. Consider how to calculate the posterior distribution of the Bernoulli distribution. The posterior distribution is given by:
@@ -146,7 +146,7 @@ $$
 
 The prior distribution is given by $Beta(\mu|a,b)$. As we can see that, after observing the data set, the parameters of the prior distribution are changed. The benefit of using the beta distribution is the prior distribution and posterior distribution remain the same form. And when we calculate the expectation and variance of the posterior distribution, we can avoid the complex integral calculation and use the formula of the expectation and variance of the beta distribution.
 
-![difference before and after ovserving](/PhD-Basic-Knowledge/PRML/Chapter%202%20Probability%20Distributions/fig/image2.png)
+![difference before and after ovserving](/PRML/Chapter%202%20Probability%20Distributions/fig/image2.png)
 
 The image above shows the difference before and after observing the dataset. We have a prior distritbution and after we observe the dataset(likelihood function), the posterior distritbution changed. In the figure, we can see that the likelihood function is increased as $\mu$ increases. As the result, the posterior distribution is also increased compared with prior distribution along with the same value of $\mu$. At the same time, the over-fitting problem is also avoid in some degree, the posterior distribution is moew smooth than the likelihood function.
 
