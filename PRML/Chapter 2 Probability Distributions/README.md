@@ -400,3 +400,250 @@ Multiple random variables joint distribution can be seen as Gaussian Distributio
 
 ### 2.3.3 Bayesian theorem for Gaussian variables
 
+### 2.3.4 Maximum Likelihood Estimation of Gaussian Distribution
+ 
+This section explains how to use maximum likelihood estimation (MLE) to estimate the parameters of a multivariate Gaussian distribution. Here is a detailed explanation:
+ 
+#### Data Set and Log Likelihood Function
+Suppose we have a dataset $ \mathbf{X} = (\mathbf{x}_1, \ldots, \mathbf{x}_N)^T $, where the observations $ \{\mathbf{x}_n\} $ are assumed to be drawn independently from a multivariate Gaussian distribution. Our goal is to estimate the parameters of the distribution through maximum likelihood estimation. The log-likelihood function is defined as:
+ 
+$$ \ln p(\mathbf{X}|\boldsymbol{\mu}, \boldsymbol{\Sigma}) = -\frac{ND}{2} \ln(2\pi) - \frac{N}{2} \ln |\boldsymbol{\Sigma}| - \frac{1}{2} \sum_{n=1}^N (\mathbf{x}_n - \boldsymbol{\mu})^T \boldsymbol{\Sigma}^{-1} (\mathbf{x}_n - \boldsymbol{\mu}) $$
+ 
+By simple rearrangement, we find that the likelihood function depends on the dataset only through the following two quantities:
+ 
+$$ \sum_{n=1}^N \mathbf{x}_n, \quad \sum_{n=1}^N \mathbf{x}_n \mathbf{x}_n^T $$
+ 
+These are called sufficient statistics for the Gaussian distribution.
+ 
+#### Maximum Likelihood Estimation of Mean Parameter
+By taking the derivative of the log-likelihood function with respect to $ \boldsymbol{\mu} $, we obtain:
+ 
+$$ \frac{\partial}{\partial \boldsymbol{\mu}} \ln p(\mathbf{X}|\boldsymbol{\mu}, \boldsymbol{\Sigma}) = \boldsymbol{\Sigma}^{-1} \sum_{n=1}^N (\mathbf{x}_n - \boldsymbol{\mu}) $$
+ 
+By setting the derivative to zero, we obtain the maximum likelihood estimate of the mean as:
+ 
+$$ \boldsymbol{\mu}_{ML} = \frac{1}{N} \sum_{n=1}^N \mathbf{x}_n $$
+ 
+This is the mean of the observed values of the data points.
+ 
+#### Maximum Likelihood Estimation of Covariance Matrix
+The maximization of $ \boldsymbol{\Sigma} $ is more complex. The simplest method is to ignore the symmetry constraint, and the final result is as follows:
+ 
+$$ \boldsymbol{\Sigma}_{ML} = \frac{1}{N} \sum_{n=1}^N (\mathbf{x}_n - \boldsymbol{\mu}_{ML})(\mathbf{x}_n - \boldsymbol{\mu}_{ML})^T $$
+ 
+This estimation involves $ \boldsymbol{\mu}_{ML} $, as it is the result of jointly maximizing $ \boldsymbol{\mu} $ and $ \boldsymbol{\Sigma} $.
+ 
+#### Expected value
+If we evaluate the expectation of the maximum likelihood estimate under the true distribution, we obtain the following result:
+ 
+$$ \mathbb{E}[\boldsymbol{\mu}_{ML}] = \boldsymbol{\mu} $$
+ 
+$$ \mathbb{E}[\boldsymbol{\Sigma}_{ML}] = \frac{N-1}{N} \boldsymbol{\Sigma} $$
+ 
+We see that the expectation of the maximum likelihood estimate of the mean is equal to the true mean. However, the maximum likelihood estimate of the covariance has an expectation that is smaller than the true value, so it is biased. We can correct this bias by defining different estimates:
+ 
+$$ \tilde{\boldsymbol{\Sigma}} = \frac{1}{N-1} \sum_{n=1}^N (\mathbf{x}_n - \boldsymbol{\mu}_{ML})(\mathbf{x}_n - \boldsymbol{\mu}_{ML})^T $$
+ 
+Obviously, from (2.122) and (2.124), we can see that the expectation of $\tilde{\boldsymbol{\Sigma}}$ is equal to $\boldsymbol{\Sigma}$.
+ 
+
+### 2.3.5 Sequential estimation
+
+We know that if we use MLE to estimate the expectation of the observation $\mathbf{x}$, the estimation is that:
+
+$$
+\mathbf{\mu}_{ML} = \frac{1}{N} \Sigma \mathbf{x_i}
+$$
+
+Using the equation above, we need to process all of the data items, which is not efficient. So we can use the sequential estimation to estimate the expectation of the observation $\mathbf{x}$. The sequential estimation is given by:
+
+$$
+\mathbf{\mu}_{ML} = \frac{1}{N} \Sigma \mathbf{x_i} = \frac{1}{N} \mathbf{x}_N + \frac{N-1}{N} \mathbf{\mu}_{ML}^{(N-1)} = \mathbf{\mu}_{ML}^{(N-1)} + \frac{1}{N} (\mathbf{x}_N - \mathbf{\mu}_{ML}^{(N-1)})
+$$
+
+It is a dynamic programming methods, we can use the last time step's parameter and the current data to calculate the current time step's parameter. The sequential estimation can be used in the online learning, which means we can update the parameter when we meet new data.
+
+But we can not always be able to derive a sequential algorithm by this, so we will give a more general method to derive the sequential estimation which is Robbins-Monro algorithm.
+
+We want to find the root of the equation:
+
+$$
+\mathbb{E}[f(\mathbf{\theta})] = 0
+$$
+
+We update the parameter $\theta$ by the equation:
+
+$$
+\theta_{N+1} = \theta_N - a_Nf(\theta_N)
+$$
+
+where $a_N$ is the step size. The Robbins-Monro algorithm is a general method to derive the sequential estimation.
+
+The problem is a fixed point problem. And we can use banach fixed point theorem to prove the convergence of the algorithm. The converge condition is given by:
+
+$$
+\sum_{N=1}^{\infty} a_N = \infty, \quad \sum_{N=1}^{\infty} a_N^2 < \infty
+$$
+
+Now let us consider how a general maximum likelihood problem can be solved sequentially using the Robbins-Monro algorithm. By definition, the maximum likelihood solution $\theta_{ML}$ is a stationary point of the log likelihood function:
+
+$$
+\frac{\partial}{\partial \theta} \ln p(\mathcal{D}|\theta) = 0
+$$
+
+When $N -> \infty$ the maximum likelihood solution can be approximated by the solution of the equation:
+
+$$
+lim_{N->\infty} \frac{1}{N} \sum_{n=1}^{N} \frac{\partial}{\partial \theta} \ln p(x_n|\theta) = E[\frac{\partial}{\partial \theta} \ln p(x|\theta)] 
+$$
+
+And the Robbins-Monro algorithm can rewrite as:
+
+$$
+\theta_{N+1} = \theta_N - a_N \frac{\partial}{\partial \theta} \ln p(x_N|\theta)
+$$
+
+### 2.3.7 Student's t-distribution
+
+In Section 2.3.7, we discuss how the Student's t-distribution can be derived by using a Gaussian distribution with a Gamma distribution as its conjugate prior for the precision (inverse variance). Below is the detailed derivation and explanation.
+
+#### Conjugate Prior for the Gaussian Distribution
+
+For a Gaussian distribution, the conjugate prior for the precision (inverse of the variance) is the Gamma distribution, given by:
+
+$$ p(\tau) = \text{Gam}(\tau|a,b) = \frac{b^a}{\Gamma(a)} \tau^{a-1} e^{-b\tau} $$
+
+where $ \tau = \frac{1}{\sigma^2} $ is the precision, and $ a $ and $ b $ are the shape and rate parameters of the Gamma distribution, respectively.
+
+#### Derivation of the Student's t-distribution
+
+If we have a univariate Gaussian distribution $ \mathcal{N}(x|\mu, \tau^{-1}) $ with a Gamma prior $ \text{Gam}(\tau|a, b) $, and we integrate out the precision, we obtain the marginal distribution of $ x $ as follows:
+
+$$ p(x|\mu, a, b) = \int_0^\infty \mathcal{N}(x|\mu, \tau^{-1}) \text{Gam}(\tau|a, b) \, d\tau $$
+
+This integral can be computed by substituting the expressions for the Gaussian and Gamma distributions and integrating with respect to $ \tau $:
+
+$$ p(x|\mu, a, b) = \int_0^\infty \left( \frac{\sqrt{\tau}}{\sqrt{2\pi}} e^{-\frac{\tau (x - \mu)^2}{2}} \right) \left( \frac{b^a}{\Gamma(a)} \tau^{a-1} e^{-b\tau} \right) \, d\tau $$
+
+Simplifying this integral, we get:
+
+$$ p(x|\mu, a, b) = \frac{\Gamma(a + \frac{1}{2})}{\Gamma(a)} \left( \frac{b}{\pi} \right)^{\frac{1}{2}} \left( 1 + \frac{(x - \mu)^2}{2b} \right)^{-(a + \frac{1}{2})} $$
+
+By introducing new parameters $ \nu = 2a $ and $ \lambda = \frac{a}{b} $, we can rewrite the distribution in the form of the Student's t-distribution:
+
+$$ \text{St}(x|\mu, \lambda, \nu) = \frac{\Gamma(\frac{\nu + 1}{2})}{\Gamma(\frac{\nu}{2})} \left( \frac{\lambda}{\pi \nu} \right)^{\frac{1}{2}} \left( 1 + \frac{\lambda (x - \mu)^2}{\nu} \right)^{-\frac{\nu + 1}{2}} $$
+
+This is known as the Student's t-distribution, where $ \nu $ is the degrees of freedom, and $ \lambda $ is related to the precision of the t-distribution.
+
+#### Properties of the Student's t-distribution
+
+1. When $ \nu $ approaches 1, the t-distribution reduces to the Cauchy distribution.
+2. When $ \nu $ approaches infinity, the t-distribution approaches the Gaussian distribution.
+3. The t-distribution has heavier tails than the Gaussian distribution, making it more robust to outliers.
+
+#### Multivariate Student's t-distribution
+
+We can extend the univariate case to the multivariate case. For a multivariate Gaussian distribution $ \mathcal{N}(\mathbf{x}|\boldsymbol{\mu}, \mathbf{\Lambda}^{-1}) $ with a Gamma distribution as the prior for the precision, we get the multivariate Student's t-distribution:
+
+$$ \text{St}(\mathbf{x}|\boldsymbol{\mu}, \mathbf{\Lambda}, \nu) = \frac{\Gamma(\frac{D}{2} + \frac{\nu}{2})}{\Gamma(\frac{\nu}{2})} \frac{|\mathbf{\Lambda}|^{\frac{1}{2}}}{(\pi \nu)^{\frac{D}{2}}} \left( 1 + \frac{\Delta^2}{\nu} \right)^{-\frac{D}{2} - \frac{\nu}{2}} $$
+
+where $ \Delta^2 = (\mathbf{x} - \boldsymbol{\mu})^T \mathbf{\Lambda} (\mathbf{x} - \boldsymbol{\mu}) $ is the squared Mahalanobis distance, and $ D $ is the dimensionality of $ \mathbf{x} $.
+
+#### Properties of the Multivariate Student's t-distribution
+
+1. **Expectation**:
+   $$ \mathbb{E}[\mathbf{x}] = \boldsymbol{\mu} \quad \text{if} \quad \nu > 1 $$
+2. **Covariance**:
+   $$ \text{cov}[\mathbf{x}] = \frac{\nu}{\nu - 2} \mathbf{\Lambda}^{-1} \quad \text{if} \quad \nu > 2 $$
+3. **Mode**:
+   $$ \text{mode}[\mathbf{x}] = \boldsymbol{\mu} $$
+
+
+### 2.3.8 Periodic variables
+
+Gaussian distributions are crucial in many applications and serve as building blocks for complex probabilistic models. However, they are not always suitable for continuous variables, especially periodic variables, which are common in practical applications.
+
+A typical example is the wind direction at a specific geographical location. Similarly, quantities measured over a 24-hour cycle or an annual cycle, like time of day or month of the year, are periodic. These can be represented using an angular (polar) coordinate $0 \leq \theta < 2\pi$.
+
+To treat periodic variables, we might choose an arbitrary origin and apply a conventional distribution, such as Gaussian. However, this approach heavily depends on the chosen origin. For example, if the observations are $\theta_1 = 1^\circ$ and $\theta_2 = 359^\circ$, a Gaussian model with an origin at $0^\circ$ would yield a mean of $180^\circ$ and a standard deviation of $179^\circ$. To address this, we need a method that is invariant to the origin.
+
+#### Method for Evaluating Periodic Variables
+1. **Mapping to Unit Circle**:
+   Convert the angular observations $\theta_n$ into Cartesian coordinates:
+   $$ \mathbf{x}_n = (\cos \theta_n, \sin \theta_n) $$
+
+2. **Averaging**:
+   Compute the average of the Cartesian coordinates:
+   $$ \mathbf{\bar{x}} = \frac{1}{N} \sum_{n=1}^N \mathbf{x}_n $$
+
+3. **Finding the Mean Angle**:
+   Determine the corresponding angle of this average:
+   $$ \bar{\theta} = \tan^{-1} \left( \frac{\sum_{n=1}^N \sin \theta_n}{\sum_{n=1}^N \cos \theta_n} \right) $$
+   This result is the maximum likelihood estimate of the mean direction.
+
+The von Mises distribution, or circular normal distribution, is a generalization of the Gaussian for periodic variables. It is defined as:
+$$ p(\theta|\mu, \kappa) = \frac{1}{2\pi I_0(\kappa)} e^{\kappa \cos(\theta - \mu)} $$
+where $\mu$ is the mean direction and $\kappa$ is the concentration parameter (similar to precision in Gaussian).
+
+1. **Log-Likelihood**:
+   The log-likelihood function for the von Mises distribution is:
+   $$ \ln p(\theta|\mu, \kappa) = -N \ln(2\pi) - N \ln I_0(\kappa) + \kappa \sum_{n=1}^N \cos(\theta_n - \mu) $$
+
+2. **Estimating $\mu$**:
+   Set the derivative with respect to $\mu$ to zero:
+   $$ \sum_{n=1}^N \sin(\theta_n - \mu) = 0 $$
+   Solving gives:
+   $$ \mu_{ML} = \tan^{-1} \left( \frac{\sum_{n=1}^N \sin \theta_n}{\sum_{n=1}^N \cos \theta_n} \right) $$
+
+3. **Estimating $\kappa$**:
+   Set the derivative with respect to $\kappa$ to zero:
+   $$ \frac{I_1(\kappa)}{I_0(\kappa)} = \frac{1}{N} \sum_{n=1}^N \cos(\theta_n - \mu_{ML}) $$
+
+- **Histogram Methods**:
+  Using histograms of observations divided into fixed bins. Simple and flexible but less accurate.
+- **Transforming Distributions**:
+  Starting from Gaussian and transforming into periodic distributions.
+  
+#### Limitations of von Mises Distribution
+- **Unimodal Nature**:
+  von Mises distribution is unimodal. Mixtures of von Mises distributions can handle multimodal data.
+
+### 2.3.9 Mixtures of Gaussians
+
+While Gaussian distributions have important analytical properties, they are limited when modeling real data sets. For example, the "Old Faithful" data set, which records the eruption times of the Old Faithful geyser, shows two distinct clusters that a single Gaussian distribution cannot capture. A mixture of Gaussians provides a better model for such data.
+
+Mixture distributions combine multiple probability distributions to model more complex densities. A mixture of $ K $ Gaussian distributions is represented as:
+
+$$ p(\mathbf{x}) = \sum_{k=1}^K \pi_k \mathcal{N}(\mathbf{x}|\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k) $$
+
+where:
+- $ \pi_k $ are the mixing coefficients, with $ 0 \leq \pi_k \leq 1 $ and $ \sum_{k=1}^K \pi_k = 1 $.
+- $ \mathcal{N}(\mathbf{x}|\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k) $ are the Gaussian components with their own means $ \boldsymbol{\mu}_k $ and covariances $ \boldsymbol{\Sigma}_k $.
+
+From the sum and product rules, the marginal density is:
+
+$$ p(\mathbf{x}) = \sum_{k=1}^K p(k)p(\mathbf{x}|k) $$
+
+This can be interpreted as:
+
+- $ p(k) = \pi_k $: the prior probability of selecting the $ k $-th component.
+- $ p(\mathbf{x}|k) = \mathcal{N}(\mathbf{x}|\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k) $: the probability of $ \mathbf{x} $ given the $ k $-th component.
+
+Using Bayes' theorem, the posterior probabilities (responsibilities) are:
+
+$$ \gamma_k(\mathbf{x}) = p(k|\mathbf{x}) = \frac{\pi_k \mathcal{N}(\mathbf{x}|\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)}{\sum_{j=1}^K \pi_j \mathcal{N}(\mathbf{x}|\boldsymbol{\mu}_j, \boldsymbol{\Sigma}_j)} $$
+
+The parameters of the Gaussian mixture model ($\pi$, $\mu$, $\Sigma$) are typically estimated using maximum likelihood. The log-likelihood function is:
+
+$$ \ln p(\mathbf{X}|\pi, \mu, \Sigma) = \sum_{n=1}^N \ln \left( \sum_{k=1}^K \pi_k \mathcal{N}(\mathbf{x}_n|\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k) \right) $$
+
+Maximizing this log-likelihood is complex due to the summation inside the logarithm. Therefore, iterative numerical optimization techniques or the Expectation-Maximization (EM) algorithm are used.
+
+The EM algorithm is a powerful framework for parameter estimation in mixture models. It iteratively maximizes the expected log-likelihood with respect to the parameters.
+
+This section highlights the limitations of single Gaussian distributions in modeling complex data and introduces mixtures of Gaussians as a solution. It explains the probabilistic interpretation of mixtures, the calculation of responsibilities, and the use of maximum likelihood and the EM algorithm for parameter estimation. The mixture model provides a flexible framework for representing a wide range of complex data distributions.
+
+## 2.4 The Exponential Family
+
+
+## 2.5 Nonparametric Methods
