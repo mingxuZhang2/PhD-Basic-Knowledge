@@ -270,3 +270,133 @@ And in fact, the beta distribution is a special case of the Dirichlet distributi
 
 
 ## 2.3 The Gaussian Distribution
+
+If the variable is continuous, the most common distribution is the Gaussian distribution. The Gaussian distribution is given by:
+
+$$
+\mathcal{N}(x|\mu,\sigma^2) = \frac{1}{(2\pi\sigma^2)^{1/2}} \exp \left \{ -\frac{1}{2\sigma^2}(x-\mu)^2 \right \}
+$$
+
+where $\mu$ is the mean of the distribution and $\sigma^2$ is the variance of the distribution. The expected value of the Gaussian distribution is given by:
+
+$$
+E[x] = \int x\mathcal{N}(x|\mu,\sigma^2)dx = \mu
+$$
+
+The variance of the Gaussian distribution is given by:
+
+$$
+Var[x] = E[x^2] - E[x]^2 = \sigma^2
+$$
+
+If the prior distribution of the Gaussian distribution is given by:
+
+$$
+p(\mu) = \mathcal{N}(\mu|\mu_0,\sigma_0^2)
+$$
+
+And the likelihood function of the Gaussian distribution is given by:
+
+$$
+p(x|\mu) = \mathcal{N}(x|\mu,\sigma^2) 
+$$
+
+The posterior distribution of the Gaussian distribution is given by:
+
+$$
+p(\mu|x) = \mathcal{N}(\mu|\mu_N,\sigma_N^2) = \mathcal{N}(\mu|\frac{\sigma^2}{N\sigma_0^2+\sigma^2}\mu_0 + \frac{N\sigma_0^2}{N\sigma_0^2+\sigma^2}x,\frac{\sigma^2\sigma_0^2}{N\sigma_0^2+\sigma^2})
+$$
+
+If the variable is a D-dimensional vector, the Gaussian distribution is given by:
+
+$$
+\mathcal{N}(\mathbf{x}|\mathbf{\mu},\mathbf{\Sigma}) = \frac{1}{(2\pi)^{D/2}} \frac{1}{|\mathbf{\Sigma}|^{1/2}} \exp \left \{ -\frac{1}{2}(\mathbf{x}-\mathbf{\mu})^T\mathbf{\Sigma}^{-1}(\mathbf{x}-\mathbf{\mu}) \right \}
+$$
+
+where $\mathbf{\mu}$ is the mean of the distribution and $\mathbf{\Sigma}$ is the covariance matrix of the distribution. Let's review the covariance matrix. The covariance matrix is given by:
+
+$$
+\mathbf{\Sigma} = \begin{bmatrix} \sigma_{11} & \sigma_{12} & \cdots & \sigma_{1D} \\ \sigma_{21} & \sigma_{22} & \cdots & \sigma_{2D} \\ \vdots & \vdots & \ddots & \vdots \\ \sigma_{D1} & \sigma_{D2} & \cdots & \sigma_{DD} \end{bmatrix}
+$$
+
+Where $\sigma_{ij}$ is the covariance between the $i$-th variable and the $j$-th variable. The diagonal elements of the covariance matrix are the variance of the variables. The off-diagonal elements of the covariance matrix are the covariance between the variables. The equation to calculate covariance is given by:
+
+$$
+\sigma_{ij} = E[(x_i-\mu_i)(x_j-\mu_j)]
+$$
+
+In chapter 1, we know the maximum entropy theorem. The Gaussian distribution is the maximum entropy distribution when the mean and the variance are given. The entropy of the Gaussian distribution is given by:
+
+$$
+H[x] = \frac{D}{2}(1+\ln(2\pi\sigma^2))
+$$
+
+Another situation that Gaussian distribution is the central limit theorem. The central limit theorem says that the sum of a large number of independent random variables is approximately Gaussian distributed. The central limit theorem is the foundation of the Gaussian distribution in the real world.
+
+![Gaussian distribution](/PRML/Chapter%202%20Probability%20Distributions/fig/image5.png)
+
+The image above shows the trend of the independent random variables. The sum of the independent random variables is approximately Gaussian distributed. The more the number of the random variables, the more the Gaussian distribution is close to the sum of the random variables.
+
+The equation of central limit theorem is given by:
+
+$$
+\lim_{N \to \infty} \frac{1}{N} \sum_{n=1}^{N} x_n \sim \mathcal{N}(\mu,\frac{\sigma^2}{N})
+$$
+
+If there are two random variables $x_1$ and $x_2$ and the sum of the two random variables is approximately Gaussian distributed. The sum of the two random variables is given by:
+
+$$
+x = x_1 + x_2
+$$
+
+The mean of the sum of the two random variables is given by:
+
+$$
+E[x] = E[x_1] + E[x_2] = \mu_1 + \mu_2
+$$
+
+The variance of the sum of the two random variables is given by:
+
+$$
+Var[x] = Var[x_1] + Var[x_2] = \sigma_1^2 + \sigma_2^2
+$$
+
+Before continue considering the geometrical form of Gaussian distribution, we need to review the linear algebra. 
+
+- Eigenvalue and eigenvector: The eigenvector of a matrix is a vector that does not change its direction when multiplied by the matrix. The eigenvalue of a matrix is a scalar that represents how the eigenvector is stretched or compressed when multiplied by the matrix. The equation of the eigenvector and eigenvalue is given by:
+
+$$
+\mathbf{A}\mathbf{v} = \lambda\mathbf{v}
+$$
+
+where $\mathbf{A}$ is a matrix, $\mathbf{v}$ is the eigenvector, and $\lambda$ is the eigenvalue. The eigenvector and eigenvalue can be calculated by the equation above. The eigenvalue is represented by $\lambda$. We know that matrix multiply a vector is a linear transformation, the eigenvalue tells us how many times the eigenvector is stretched or compressed when multiplied by the matrix **compared with eigenvector**.
+
+Back to the Gaussian distribution. Let's consider the quadratic form of the Gaussian distribution. The quadratic form of the Gaussian distribution is given by:
+
+$$
+\Delta^2 = (\mathbf{x}-\mathbf{\mu})^T\mathbf{\Sigma}^{-1}(\mathbf{x}-\mathbf{\mu})
+$$
+
+The quantity $\Delta$ is called the Mahalanobis distance. The Mahalanobis distance is a measure of the distance between a point and a distribution. The Mahalanobis distance is a generalization of the Euclidean distance. The Euclidean distance is a special case of the Mahalanobis distance when the covariance matrix is the identity matrix.
+
+We know that the covariance matrix can be taken to be symmetric and positive definite. The covariance matrix can be diagonalized by the eigenvector and eigenvalue. The covariance matrix can be written as:
+
+$$
+\mathbf{\Sigma} = \mathbf{U}\mathbf{\Lambda}\mathbf{U}^T
+$$
+
+where $\mathbf{U}$ is the matrix of the eigenvector and $\mathbf{\Lambda}$ is the diagonal matrix of the eigenvalue. The eigenvector and eigenvalue can be calculated by the equation above.
+
+Similarly, the inverse of the covariance matrix can be written as:
+
+$$
+\mathbf{\Sigma}^{-1} = \mathbf{U}\mathbf{\Lambda}^{-1}\mathbf{U}^T
+$$
+
+### 2.3.1 Conditional Gaussian Distribution
+
+Multiple random variables joint distribution can be seen as Gaussian Distribution. The conditional distribution of the Gaussian distribution is also Gaussian distribution as well as the marginal distribution.
+
+
+### 2.3.3 Bayesian theorem for Gaussian variables
+
