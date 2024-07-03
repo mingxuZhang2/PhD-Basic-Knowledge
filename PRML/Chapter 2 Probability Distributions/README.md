@@ -645,5 +645,140 @@ This section highlights the limitations of single Gaussian distributions in mode
 
 ## 2.4 The Exponential Family
 
+We have discussed the Gaussian Distribution, Bernoulli Distribution, and Multinomial Distribution. These distributions are all members of the exponential family. The exponential family is a class of probability distributions that can be expressed in the form:
+
+$$ p(\mathbf{x}|\mathbf{\eta}) = h(\mathbf{x}) g(\mathbf{\eta}) \exp(\mathbf{\eta}^T \mathbf{u}(\mathbf{x})) $$
+
+where: $h(\mathbf{x})$ is called the base measure, $g(\mathbf{\eta})$ is the normalization factor, $\mathbf{\eta}$ is the natural parameter, and $\mathbf{u}(\mathbf{x})$ is the sufficient statistic.
+
+The base measure $h(\mathbf{x})$ is a non-negative function of $\mathbf{x}$ that does not depend on the parameter $\mathbf{\eta}$. The normalization factor $g(\mathbf{\eta})$ ensures that the distribution integrates to 1. The natural parameter $\mathbf{\eta}$ is a function of the mean and variance of the distribution. The sufficient statistic $\mathbf{u}(\mathbf{x})$ summarizes the data in a compact form.
+
+Firstly, let's consider the Bernoulli distribution. The Bernoulli distribution is given by:
+
+$$ p(x|\mu) = \mu^x (1-\mu)^{1-x} $$
+
+where $x \in \{0, 1\}$ and $\mu \in [0, 1]$. The Bernoulli distribution can be expressed in the form of the exponential family:
+
+$$ p(x|\mu) = \mu^x (1-\mu)^{1-x} = \exp(x \ln \mu + (1-x) \ln (1-\mu)) $$
+$$ = \exp((\ln \frac{\mu}{1-\mu})x + \ln (1-\mu)) $$
+
+where $\eta = \ln \frac{\mu}{1-\mu}$ and $u(x) = x$. The natural parameter $\eta$ is a function of the mean $\mu$. The sufficient statistic $u(x)$ is the data itself. And the $h(x)$ and $g(\eta)$ are:
+
+$$ h(x) = 1, \quad g(\eta) = (1-\mu) $$
+
+Similarly, the Gaussian distribution is also a member of the exponential family. The Gaussian distribution is given by:
+
+$$ p(x|\mu, \sigma^2) = \frac{1}{(2\pi \sigma^2)^{1/2}} \exp \left \{ -\frac{1}{2\sigma^2}(x-\mu)^2 \right \} $$
+
+The Gaussian distribution can be expressed in the form of the exponential family:
+
+$$ p(x|\mu, \sigma^2) = \frac{1}{(2\pi \sigma^2)^{1/2}} \exp \left \{ -\frac{1}{2\sigma^2}(x-\mu)^2 \right \} $$
+
+$$ = \frac{1}{(2\pi \sigma^2)^{1/2}} \exp \left \{ -\frac{1}{2\sigma^2}x^2 + \frac{\mu}{\sigma^2}x - \frac{\mu^2}{2\sigma^2} \right \} $$
+
+$$ = \frac{1}{(2\pi \sigma^2)^{1/2}} \exp \left \{ \frac{x^2}{-2} \right \} \exp \left \{ \frac{\mu}{\sigma^2}x - \frac{\mu^2}{2\sigma^2} \right \} $$
+
+$$ = \exp \left \{ \frac{x^2}{-2} \right \} \exp \left \{ \frac{\mu}{\sigma^2}x - \frac{\mu^2}{2\sigma^2} \right \} $$
+
+$$ = \exp \left \{ \frac{x^2}{-2} + \frac{\mu}{\sigma^2}x - \frac{\mu^2}{2\sigma^2} \right \} $$
+
+where $\eta = \frac{\mu}{\sigma^2}$ and $u(x) = x^2$. The natural parameter $\eta$ is a function of the mean $\mu$ and variance $\sigma^2$. The sufficient statistic $u(x)$ is the square of the data. And the $h(x)$ and $g(\eta)$ are:
+
+$$ h(x) = 1, \quad g(\eta) = (2\pi)^{1/2} \sigma $$
+
 
 ## 2.5 Nonparametric Methods
+
+Previous methods is parametric methods, which means we need to assume the form of the distribution. But what if the distribution is werid and we can not formulate it as Gaussian distribution or others. We need to know some Nonparametric Methods.
+
+![nonparametric](fig/image6.png)
+
+The image above shows the histogram methods. Asume we have a single continuous variable $x$ and some observations. We can partition the variable $x$ into some bins and count the number of the observations in each bin. The histogram is a simple nonparametric method to estimate the probability density function.
+
+If the total number of observation is $N$ and the bins' width is $\delta_i$, the probability value for each bin given by:
+
+$$
+p(x) = \frac{C_i}{N\delta_i}
+$$
+
+where $C_i$ is the number of the observations in the $i$-th bin. The histogram is a simple nonparametric method to estimate the probability density function.
+
+From the image above, we can see that the smaller $\delta_i$ is, the more the bins are. The more the bins are, the more the histogram is close to the true probability density function. But the more the bins are, the more the variance is. So we need to balance the variance and the bias. 
+
+But if we use histogram, the bin has a fixed width and the data near the fixed width will easily disclassify into the near bin which will cause a incorrect density estimation. So we can choose another method to estimate the probability density function which is Kernel Density Estimation.
+
+### 2.5.1 Kernel Density Estimators
+
+If we have a observation $\mathbf{x}$ from some unknown probability density $p(\mathbf{x})$ and $\mathbf{x}$ is a D-dimensional vector. The probability that a small region $V$ containing $\mathbf{x}$ is given by:
+
+$$
+p(\mathbf{x}) = \int_V p(\mathbf{x})d\mathbf{x}
+$$
+
+And now we have $N$ observation that are independently drawn from $p(\mathbf{x})$. The probability that a small region $V$ contains $n$ of the observations is given by:
+
+$$
+Bin(n|N,p) = \binom{N}{n}p^n(1-p)^{N-n}
+$$
+
+The expected value of the number of observations in the region $V$ is given by:
+
+$$
+E[n] = Np
+$$ 
+
+So if the $N$ is large, the total number of the observations in the region $V$ is approximately $Np$.
+
+Let's discuss the kernel method in detail. We take the region $V$ to be a small hypercube that is centered on $\mathbf{x}$ and has fixed sides of length. In order to count the number $K$ of points falling within the region, we will define the follow function:
+
+$$
+K(\mathbf{u}) = \begin{cases} 1 & \text{if} |u_i| \leq \frac{1}{2} \text{for all} i \\ 0 & \text{otherwise} \end{cases}
+$$
+
+The function bounds the region $V$ by the hypercube. The function $K(\mathbf{u})$ is called the kernel function. The quantity $k = K(\frac{\mathbf{x}-\mathbf{x}_n}{h})$ is 1 if the point $\mathbf{x}_n$ falls within the region $V$ and 0 otherwise. BTW, the $h$ is the width of the hypercube. The total amount of the points in the region $V$ is given by:
+
+$$
+K(\mathbf{u}) =  \sum_{n=1}^{N} k(\frac{\mathbf{x}-\mathbf{x}_n}{h})
+$$
+
+The probability that the region $V$ contains $n$ of the observations is given by:
+
+$$
+p(\mathbf{x}) = \frac{1}{Nh^D} \sum_{n=1}^{N} K(\frac{\mathbf{x}-\mathbf{x}_n}{h})
+$$
+
+where $h^D$ is the volume of the region $V$. The equation above is the kernel density estimator. We can interpret the equation as the sum of $N$ hypercubes centered on the observations $\mathbf{x}_n$ and normalized by the volume of the region $V$. 
+
+Similar to the histogram, the boundary of the region is discontinuous. So if we choose a more smooth kernel function, the density estimation will be more smooth. The Gaussian kernel is a common choice for the kernel function. The Gaussian kernel is given by:
+
+$$
+p(\mathbf{x}) = \frac{1}{N} \sum_{n=1}^{N} \frac{1}{(2\pi h^2)^{1/2}} \exp(-\frac{||\mathbf{x}-\mathbf{x}_n||^2}{2h^2})
+$$
+
+where $h$ represents the standard deviation of the Gaussian kernel. The kernel method is aimed to using a function that can make a boundary of the region where centered on the observation $\mathbf{x}_n$, the data items in the region will make contribution to the density for $\mathbf{x_n}$. The hypercube is a simple kernel function, the region is a hypercube that is easy to imagine. The Gaussian kernel can also do the same thing, but it will has a more smooth boundary that can avoid the discontinuous boundary.
+
+![kernel](fig/image7.png)
+
+The image above shows the kernel density estimation when using different $h$. We can see that $h$ is a trade-off between the sensitivity to noise and over-smoothing. The smaller $h$ is, the more the noise is. The larger $h$ is, the more the over-smoothing is. 
+
+The kernel function is random as long as satisfies the following conditions:
+
+$$
+K(\mathbf{u}) \geq 0, \quad \int K(\mathbf{u})d\mathbf{u} = 1
+$$
+
+which will ensure that the resulting probability distribution is normalized and non-negative.
+
+### 2.5.2 Nearest-Neighbor Methods
+
+We know that the density is eneven, somewhere the density is high so we will turn up the $h$ but it will introduce more noise where the density is low. So we want to solve this problem that we can choose different $h$ depends on the location within the data space. The nearest-neighbor methods can solve this problem.
+
+![nearest-neighbor](fig/image8.png)
+
+We can see that the image above shows that the parameter $k$ will control the smoothness of the estimation. In kernel methods, the volume of the region is fixed which will depends on the parameter $h$ and the kernel function. While in KNN, we will use the nearest $K$ data points to estimate the density. The volume of the region is the minimum volume that contains $K$ data points. 
+
+![knn](fig/image9.png)
+
+The image above shows the decision boundary for different $K$. The greater $K$ is, the more smooth the decision boundary is.  
+
+And one interesting property of KNN is that if the amount of data $N -> \infty$, when $K=1$, the error rate will not greater than twice the Bayes error rate.
