@@ -5,7 +5,7 @@ To enhance my foundational knowledge for research, I plan to study the basics of
 - [ ]  [PRML](https://github.com/gerdm/prml): I have found a GitHub repository that contains notes and example code for PRML. I plan to use this repository to assist my study of PRML. I plan to complete one or two chapters per week for this book, which has 14 chapters in total, so I will finish it in three months. I will write code and derive the theories myself, documenting my progress in Markdown. I will upload my study progress to my GitHub repository.
 
     - [√]  Introduction [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/PRML/Chapter%201%20Introduction)
-    - [ ]  Probability Distributions
+    - [√]  Probability Distributions [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/PRML/Chapter%202%20Probability%20Distributions)
     - [ ]  Linear Models for Regression
     - [ ]  Linear Models for Classification
     - [ ]  Neural Networks
