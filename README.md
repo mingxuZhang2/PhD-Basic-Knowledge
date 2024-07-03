@@ -41,7 +41,7 @@ To enhance my foundational knowledge for research, I plan to study the basics of
 - [ ]  [EasyRL](https://datawhalechina.github.io/easy-rl/): Easy RL is a tutorial about Reinforcement Learning recommended by Prof. Yaodong Yang. This book includes 13 chapters. Unlike PRML and CS224N, Easy RL has fewer coding tasks but more theory. Therefore, I will focus on the theoretical proof of each algorithm. I will also complete at least one chapter per week.
     - [√]  Foundamental of Reinforcement [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/EasyRL/Chapter%201%20Foundamental%20of%20Reinforcement%20Learning)
     - [√]  MDP [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/EasyRL/Chapter%202%20MDP)
-    - [ ]  Tabular Methods
+    - [√]  Tabular Methods [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/EasyRL/Chapter%203%20Tabular%20Methods)
     - [ ]  Policy Gradient
     - [ ]  PPO
     - [ ]  DQN Basic
