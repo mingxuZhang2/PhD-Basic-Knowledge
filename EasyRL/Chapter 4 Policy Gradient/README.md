@@ -122,7 +122,9 @@ Previous equation consider the whole trajectory, in this equation, we consider t
 
 Moreover, we can add a discount factor to the reward, so the formula will be:
 
-$$\nabla{R}_\theta\approx\frac1N\sum_{n=1}^N\sum_{t=1}^{T_n}\left(\sum_{t^{\prime}=t}^{T_n}\gamma^{t^{\prime}-t}r_{t^{\prime}}^n-b\right)\nabla\log p_\theta\left(a_t^n\mid s_t^n\right)$$
+$$
+\nabla{R}_\theta\approx\frac1N\sum_{n=1}^N\sum_{t=1}^{T_n}\left(\sum_{t^{\prime}=t}^{T_n}\gamma^{t^{\prime}-t}r_{t^{\prime}}^n-b\right)\nabla\log p_\theta\left(a_t^n\mid s_t^n\right)
+$$
 
 And then, we can introduce a new function called advantage function:
 

@@ -55,10 +55,12 @@ To enhance my foundational knowledge for research, I plan to study the basics of
     
 - [ ]  Research: I will spend half of my time enhancing my basic knowledge and the other half on research. I will conduct the following research projects.
     - [ ]  Weak-to-Strong Generalization.
-    - [ ]  ADRC for Lagrange Multiplier Updating.
+    - [ ]  SafeRL.
 
 - [ ]  Paper Reading: Meanwhile, I think I need to read some classic papers, but I am not sure which ones to read yet. So this section remains to be discussed. I will read some LLM papers on weak-to-strong generalization and scalable oversight, which are related to my research. I will read at least three papers per week.
     - [ ]  [Weak-to-Strong Extrapolation Expedites Alignment](https://arxiv.org/abs/2404.16792)
     - [ ]  [Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/pdf/1301.3781)
     - [ ] [GloVe: Global Vectors for Word Representation](https://aclanthology.org/D14-1162.pdf)
     - [ ] [Improving Word Representations Via Global Context And Multiple Word Prototypes](https://aclanthology.org/P12-1092.pdf)
+    - [ ] [A Survey of the State of Explainable AI for Natural Language Processing][https://arxiv.org/pdf/2010.00711]
+    - [ ] [Explainable Artificial Intelligence (XAI): Concepts, Taxonomies, Opportunities and Challenges toward Responsible AI][https://arxiv.org/pdf/1910.10045]
