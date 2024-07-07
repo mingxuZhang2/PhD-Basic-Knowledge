@@ -53,14 +53,11 @@ But we meet a question is that the expectation is hard to calculate, so we can u
 
 $$
 \begin{aligned}
-
 \nabla{R}_\theta &=E_{\tau\sim p_{\theta}(\theta)}[R(\tau)\nabla \log p_\theta(\tau)]\\
 &\approx\frac{1}{N}\sum_{i=1}^{N}R(\tau^{(i)})\nabla \log p_\theta(\tau^{(i)})\\
 &=\frac{1}{N}\sum_{i=1}^{N}R(\tau^{(i)})\nabla\left\{  \log(s_1) + \sum_{t=1}^T \log p_\theta(a_t|s_t) + \sum_{t=1}^T \log p(s_{t+1},|s_t,a_t) \right\}\\
-
 &=\frac{1}{N}\sum_{i=1}^{N}R(\tau^{(i)})\sum_{t=1}^{T}\nabla \log p_{\theta}(a_t^{(i)}|s_t^{(i)})
 \end{aligned}
-
 $$
 
 So if we consider the equation above with a high level viewpoint, the gradient is about the reward function and the change of probability of the given state-action pair. So if the $R(\tau)$ is positive, we will increase the probability, otherwise we will decrease it. So the update rule is:
@@ -85,14 +82,11 @@ We know that the gradient is given by:
 
 $$
 \begin{aligned}
-
 \nabla{R}_\theta &=E_{\tau\sim p_{\theta}(\theta)}[R(\tau)\nabla \log p_\theta(\tau)]\\
 &\approx\frac{1}{N}\sum_{i=1}^{N}R(\tau^{(i)})\nabla \log p_\theta(\tau^{(i)})\\
 &=\frac{1}{N}\sum_{i=1}^{N}R(\tau^{(i)})\nabla\left\{  \log(s_1) + \sum_{t=1}^T \log p_\theta(a_t|s_t) + \sum_{t=1}^T \log p(s_{t+1},|s_t,a_t) \right\}\\
-
 &=\frac{1}{N}\sum_{i=1}^{N}R(\tau^{(i)})\sum_{t=1}^{T}\nabla \log p_{\theta}(a_t^{(i)}|s_t^{(i)})
 \end{aligned}
-
 $$
 
 And if the reward function is positive, we will increase the probability. But in some scenarios, the reward fuction is always positive or always negative. Assume the reward is always positive, without loss the generality, if we directly use the equation above, it will tell model to increase all of the action probability. But in fact, we don't need to increase all of the action probability, we just need to increase the probability of the good action and decrease the probability of the bad action. 
@@ -104,9 +98,7 @@ Like the image above, we increase all of the action probability, and we normaliz
 So in order to solve the problem, we can rewrite the formula:
 
 $$
-
 \nabla{R}_\theta \approx \frac{1}{N}\sum_{i=1}^{N} \left \{ R(\tau^{(i)}) - b \right \}\sum_{t=1}^{T}\nabla \log p_{\theta}(a_t^{(i)}|s_t^{(i)})
-
 $$
 
 We call $b$ is the baseline. By introducing the baseline, we can let the weight term both have positive and negative. So if we sample a bad action, the probability will decrease and if we sample a good action, the probablity will increase. One of a good choice is, we can let $b \approx E[R(\tau)]$. It will record during the training process.
