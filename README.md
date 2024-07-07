@@ -42,7 +42,7 @@ To enhance my foundational knowledge for research, I plan to study the basics of
     - [√]  Foundamental of Reinforcement [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/EasyRL/Chapter%201%20Foundamental%20of%20Reinforcement%20Learning)
     - [√]  MDP [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/EasyRL/Chapter%202%20MDP)
     - [√]  Tabular Methods [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/EasyRL/Chapter%203%20Tabular%20Methods)
-    - [ ]  Policy Gradient
+    - [√]  Policy Gradient [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/EasyRL/Chapter%204%20Policy%20Gradient)
     - [ ]  PPO
     - [ ]  DQN Basic
     - [ ]  DQN Tricks
