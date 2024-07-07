@@ -22,8 +22,8 @@ To enhance my foundational knowledge for research, I plan to study the basics of
 - [ ]  [CS224N(For NLP Technique)](https://web.stanford.edu/class/cs224n/index.html#schedule): CS224N-2024 Spring is taught by Stanford. The course covers NLP techniques, including LLM, RLHF, DPO, and more. The problem is that there are no available teaching videos right now; only the 2023 course materials are accessible. Therefore, I will start by learning from the slides. CS224N includes tutorials and assignments. There are four assignments, and I will complete these assignments and take notes. I will complete at least one tutorial per week and upload my progress to my GitHub repository.
     - [√]  Word Vectors [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/CS224N/Chapter%201%20Word%20Vectors)
     - [√]  Word Vectors, Word Senses, and Neural Classifiers [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/CS224N/Chapter%202%20Word%20Vectors%2C%20Word%20Senses%2C%20and%20Neural%20Classifiers) [Assignment1(Done)](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/blob/main/CS224N/Chapter%202%20Word%20Vectors%2C%20Word%20Senses%2C%20and%20Neural%20Classifiers/Assignment1/student/exploring_word_vectors.ipynb)
-    - [√]  Backpropagation and Neural Network Basics [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/CS224N/Chapter%203%20BP%20and%20Neural%20Network) [Assignment2](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/CS224N/Chapter%203%20BP%20and%20Neural%20Network/Assgnment%202/student)
-    - [ ]  Dependency Parsing
+    - [√]  Backpropagation and Neural Network Basics [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/CS224N/Chapter%203%20BP%20and%20Neural%20Network) 
+    - [ ]  Dependency Parsing [Assignment2](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/CS224N/Chapter%203%20BP%20and%20Neural%20Network/Assgnment%202/student) 
     - [ ]  Recurrent Neural Networks
     - [ ]  Sequence to Sequence Models and Machine Translation
     - [ ]  LLM intro
