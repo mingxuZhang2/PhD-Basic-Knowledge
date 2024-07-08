@@ -73,6 +73,13 @@ class ParserModel(nn.Module):
         ### 
         ### See the PDF for hints.
 
+        self.embed_to_hidden_weight = nn.Parameter(torch.nn.init.xavier_uniform_(torch.empty(self.embed_size * self.n_features, self.hidden_size)))
+        self.embed_to_hidden_bias = nn.Parameter(torch.nn.init.uniform_(torch.empty(self.hidden_size)))
+        self.dropout = nn.Dropout(p=self.dropout_prob)
+        self.hidden_to_logits_weight = nn.Parameter(torch.nn.init.xavier_uniform_(torch.empty(self.hidden_size, self.n_classes)))
+        self.hidden_to_logits_bias = nn.Parameter(torch.nn.init.uniform_(torch.empty(self.n_classes)))
+
+
 
 
 
@@ -110,6 +117,10 @@ class ParserModel(nn.Module):
 
 
         ### END YOUR CODE
+
+        x = self.embeddings[w]
+        x = x.view(w.shape[0], -1)
+
         return x
 
 
@@ -146,6 +157,13 @@ class ParserModel(nn.Module):
 
 
         ### END YOUR CODE
+        out = self.embedding_lookup(w)
+        out = torch.matmul(out, self.embed_to_hidden_weight) + self.embed_to_hidden_bias
+        out = F.relu(out)
+        out = self.dropout(out)
+        out = torch.matmul(out, self.hidden_to_logits_weight) + self.hidden_to_logits_bias
+        # using softmax
+        logits = F.softmax(out, dim=1)
         return logits
 
 
