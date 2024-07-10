@@ -262,3 +262,249 @@ The image above shows $h(x) = sin 2\pi x$. The red curve in the right figure sho
 
 ## 3.3 Bayesian Linear Regression
 
+### 3.3.1 Parameter distribution
+
+In Bayesian framework, we consider the whole distribution of the parameters rather than only calculate the maximum likelihood. The conjugate prior distribution of the parameters is given by:
+
+$$
+p(\mathbf{w}) = \mathcal{N}(\mathbf{w}|\mathbf{m}_0, \mathbf{S}_0)
+$$
+
+where $\mathbf{m}_0$ is the mean of the prior distribution, and $\mathbf{S}_0$ is the covariance matrix of the prior distribution. And the posterior distribution is given by:
+
+$$
+p(\mathbf{w}|\mathbf{t}) = \mathcal{N}(\mathbf{w}|\mathbf{m}_N, \mathbf{S}_N)
+$$
+
+where $\mathbf{m}_N = \mathbf{S}_N(\mathbf{S}_0^{-1}\mathbf{m}_0 + \beta\mathbf{\Phi}^T\mathbf{t})$, $\mathbf{S}_N^{-1} = \mathbf{S}_0^{-1} + \beta\mathbf{\Phi}^T\mathbf{\Phi}$. If we consider an infinitely board prior distribution, the posterior distribution is given by:
+
+$$
+p(\mathbf{w}|\alpha) = \mathcal{N}(\mathbf{w}|\mathbf{0}, \alpha^{-1}\mathbf{I})
+$$
+
+where $\alpha$ is the precision of the prior distribution. If $\alpha -> \infty$, the prior distribution is infinitely board; if $\alpha -> 0$, the prior distribution is infinitely narrow.
+
+And we re-write the $\mathbf{m}_N = \mathbf{S}_N(\mathbf{S}_0^{-1}\mathbf{m}_0 + \beta\mathbf{\Phi}^T\mathbf{t})$ as:
+
+$$
+\mathbf{m}_N = \beta\mathbf{S}_N\mathbf{\Phi}^T\mathbf{t}
+$$
+
+Also, the $\mathbf{S}_N^{-1} = \mathbf{S}_0^{-1} + \beta\mathbf{\Phi}^T\mathbf{\Phi}$ can be re-written as:
+
+$$
+\mathbf{S}_N = (\alpha\mathbf{I} + \beta\mathbf{\Phi}^T\mathbf{\Phi})^{-1}
+$$
+
+The log of the posterior distribution is given by:
+
+$$
+\ln p(\mathbf{w}|\mathbf{t}) = \frac{M}{2}\ln\alpha - \frac{N}{2}\ln\beta - \frac{1}{2}\ln|\mathbf{S}_N| - \frac{\beta}{2}E_D(\mathbf{w})
+$$
+
+where $E_D(\mathbf{w}) = \sum_{n=1}^{N}\{t_n - \mathbf{w}^T\mathbf{\phi}(\mathbf{x}_n)\}^2$ is the sum-of-squares error function. The maximum likelihood solution for $\mathbf{w}$ is obtained by minimizing $E_D(\mathbf{w})$. 
+
+We can still use the sequential learning to update the parameters, assume we have the new data point $t_n$ and the matrix $\mathbf{\phi}(\mathbf{x}_n)$, the previous posterior distribution $p(w|t_{1:n-1})$ will be the new prior distribution $p(w|t_{1:n})$. And posterior distribution expectaion is given by:
+
+$$
+\mathbf{m}_N = S_N(S_0^{-1}m_0 + \beta\mathbf{\phi}(\mathbf{x}_n)t_n)
+$$
+
+$$
+\mathbf{S}_N = \mathbf{S_0}^{-1} + \beta\mathbf{\phi}(\mathbf{x}_n)\mathbf{\phi}(\mathbf{x}_n)^T
+$$
+
+Using this updating rule, we can update the parameters with the data coming in a continuous stream.
+
+### 3.3.2 Predictive distribution
+
+Firstly, consider what is predictive distribution. The predictive distribution is the distribution of the target variable $t$ given a new input variable $\mathbf{x}$. The predictive distribution is given by:
+
+$$
+p(t|\mathbf{x}, \mathbf{t}, \alpha, \beta) = \int p(t|\mathbf{x}, \mathbf{w}, \beta)p(\mathbf{w}|\mathbf{t}, \alpha, \beta)d\mathbf{w}
+$$
+
+where $p(t|\mathbf{x}, \mathbf{w}, \beta)$ is the likelihood function, and $p(\mathbf{w}|\mathbf{t}, \alpha, \beta)$ is the posterior distribution of the parameters. It is the sum of all of the possible parameters weighted by their posterior probability. The predictive distribution is given by:
+
+$$
+p(t|\mathbf{x}, \mathbf{t}, \alpha, \beta) = \mathcal{N}(t|\mathbf{m}_N^T\mathbf{\phi}(\mathbf{x}), \frac{1}{\beta} + \mathbf{\phi}(\mathbf{x})^T\mathbf{S}_N\mathbf{\phi}(\mathbf{x}))
+
+$$
+
+where $\mathbf{m}_N$ and $\mathbf{S}_N$ are the posterior distribution of the parameters. The predictive distribution is a Gaussian distribution with mean $\mathbf{m}_N^T\mathbf{\phi}(\mathbf{x})$ and variance $\frac{1}{\beta} + \mathbf{\phi}(\mathbf{x})^T\mathbf{S}_N\mathbf{\phi}(\mathbf{x})$. The variance of the predictive distribution is the sum of the variance of the noise and the variance of the model.
+
+![image2](fig/image2.png)
+
+The image shows a model consists with 9 Gaussian basis functions and the predictive distribution of the model. The red curve shows the average prediction of the model, and the green curve shows the true value. The shaded area shows the variance of the predictive distribution. 
+
+![image3](fig/image3.png)
+
+And we can sample from the posterior distribution of the parameters $w$ to get the predicted curve, the image above shows the predicted curve of the model which is sampled from the posterior distribution of the parameters $w$.
+
+### 3.3.3 Equivalent kernel
+
+The basis function is a reflection of the input variables, we want to find the best parameters to fit the data. As we discussed in previous, the best parameter $w$ is given by the posterior expectation $\mathbf{m}_N$. So $y(x) = \mathbf{m}_N^T\mathbf{\phi}(x)$ is the best prediction of the model. And since $\mathbf{m}_N$ is calculated from the prior and the data, we can rewrite $\mathbf{m}_N$ as:
+
+$$
+\mathbf{m}_N = \beta\mathbf{S}_N\mathbf{\Phi}^T\mathbf{t}
+$$
+
+Then we can rewrite the prediction as:
+
+$$y(\mathbf{x},\mathbf{m}_N)=\mathbf{m}_N^\mathrm{T}\phi(\mathbf{x})=\beta\phi(\mathbf{x})^\mathrm{T}\mathbf{S}_N\mathbf{\Phi}^\mathrm{T}\mathbf{t}=\sum\limits_{n=1}^\infty\beta\phi(\mathbf{x})^\mathrm{T}\mathbf{S}_N\phi(\mathbf{x}_n)t_n$$
+
+We can consider the $\beta\mathbf{S}_N\phi(\mathbf{x}_n)$ is a weight matrix of the basis function. We can define the kernel function as:
+
+$$
+k(\mathbf{x},\mathbf{x}')=\beta\phi(\mathbf{x})^\mathrm{T}\mathbf{S}_N\phi(\mathbf{x}')
+$$
+
+Then we can rewrite the prediction as:
+
+$$
+y(\mathbf{x},\mathbf{m}_N)=\sum\limits_{n=1}^\infty k(\mathbf{x},\mathbf{x}_n)t_n
+$$
+
+And consider the covariance between $y(\mathbf{x},\mathbf{m}_N)$ and $y(\mathbf{x}',\mathbf{m}_N)$ is given by:
+
+$$
+\text{cov}[y(\mathbf{x},\mathbf{m}_N),y(\mathbf{x}',\mathbf{m}_N)] = \text{cov}[\phi(\mathbf{x})^\mathrm{T}\mathbf{w},\phi(\mathbf{x}')^\mathrm{T}\mathbf{w}] = \phi(\mathbf{x})^\mathrm{T}\mathbf{S}_N\phi(\mathbf{x}') = \beta^{-1} k(\mathbf{x},\mathbf{x}')
+$$
+
+Equivalent kernel shows the partial feature of the model, the point near the input variable $\mathbf{x}$ will have a higher weight, and the point far away from the input variable $\mathbf{x}$ will have a lower weight. The equivalent kernel is a reflection of the model, and it can be used to analyze the model.
+
+## 3.4 Bayesian Model Comparison
+
+Firstly, let's consider how well the model fits the data, we call this is the model evidence. The model evidence is given by:
+
+$$
+p(\mathbf{t}|\mathbf{X}, \alpha, \beta) = \int p(\mathbf{t}|\mathbf{X}, \mathbf{w}, \beta)p(\mathbf{w}|\alpha)d\mathbf{w}
+$$
+
+where $p(\mathbf{t}|\mathbf{X}, \mathbf{w}, \beta)$ is the likelihood function, and $p(\mathbf{w}|\alpha)$ is the prior distribution of the parameters. The model evidence is the sum of all of the possible parameters weighted by their prior probability. 
+
+The model evidence is a good trade off between the model complexity and the model fit. A higher model evidence means the model is more likely to be the true model. It is different from the loss, loss only consider the error between the prediction and the true value, but the model evidence consider the model complexity, it adds some penalty term to the loss and so we will choose the smaller model.
+
+Based on model evidence, we can give a metric called the Bayesian Information Criterion (BIC). The BIC is given by:
+
+$$
+BIC = -2\ln p(\mathbf{t}|\mathbf{X}, \alpha, \beta) + M\ln N
+$$
+
+where $M$ is the number of parameters in the model, and $N$ is the number of data points. The BIC is a trade off between the model evidence and the model complexity. A smaller BIC means the model is more likely to be the true model.
+
+## 3.5 The Evidence Approximation
+
+Previous discuss introduce the noise $\beta$ and the precision of the prior distribution $\alpha$, but how to choose the $\alpha$ and $\beta$? Even if we can calculate the edge distribution to reduce the parameters, but it is not computable. So we need to find alternative methods to estimate the parameters.
+
+If we introduce hyperpriors over $α$ and $β$, the predictive distribution is obtained by marginalizing over $w$, $α$ and $β$ so that:
+
+$$
+p(t|\mathbf{x}, \mathbf{t}) = \int\int\int p(t|\mathbf{x}, \mathbf{w}, \beta)p(\mathbf{w}|\mathbf{t}, \alpha, \beta)p(\alpha, \beta|\mathbf{t})d\mathbf{w}d\alpha d\beta
+$$
+
+Consider a pair of value $\hat{\alpha},\hat{\beta}$, if the distribution is sharply peaked around $\hat{\alpha},\hat{\beta}$, we can use the Laplace approximation to approximate the distribution. The Laplace approximation is given by:
+
+$$
+p(t|\mathbf{t}) \approx p(t|\mathbf{t}, \hat{\alpha}, \hat{\beta}) = \int p(t|\mathbf{x}, \mathbf{w}, \hat{\beta})p(\mathbf{w}|\mathbf{t}, \hat{\alpha}, \hat{\beta})d\mathbf{w}
+$$
+
+And we know in Bayesian framework, we have:
+
+$$p(\alpha,\beta|t)\propto p(t|\alpha,\beta)p(\alpha,\beta) $$
+
+We can maximize the posterior distribution of $\alpha$ and $\beta$ to get the $\hat{\alpha}$ and $\hat{\beta}$. The $\hat{\alpha}$ and $\hat{\beta}$ are the maximum likelihood solution of the hyperparameters.
+
+We introduce a metric $\frac{\alpha}{\beta}$ to measure the complexity of the model. If $\frac{\alpha}{\beta}$ is large, the model is more complex, and if $\frac{\alpha}{\beta}$ is small, the model is simpler. We can use the evidence approximation to estimate the hyperparameters $\alpha$ and $\beta$.
+
+And next, there are some methods to approximate the evidence, such as the Laplace approximation, the Variational Bayes, and the Expectation Propagation. The Laplace approximation is a simple method to approximate the evidence, and the Variational Bayes and the Expectation Propagation are more complex methods to approximate the evidence.
+
+### 3.5.1 Evaluation of the evidence function
+
+The marginal likelihood function $p(\mathbf{t}|\alpha,\beta)$ is the evidence of the model which is given by:
+
+$$
+p(\mathbf{t}|\alpha,\beta) = \int p(\mathbf{t}|\mathbf{w},\beta)p(\mathbf{w}|\alpha)d\mathbf{w}
+$$
+
+We can rewrite the evidence function as:
+
+$$
+p(\mathbf{t}|\alpha,\beta) = (\frac{\beta}{2\pi} )^{N/2}(\frac{\mathbf{\alpha}}{2\pi})^{M/2}\int\exp\{-E(\mathbf{m}_N)\}d\mathbf{w}
+$$
+
+and we define:
+$$
+E(\mathbf{w}) = \frac{\beta}{2}\sum_{n=1}^{N}\{t_n - \mathbf{w}^T\mathbf{\phi}(\mathbf{x}_n)\}^2 + \frac{\alpha}{2}\mathbf{w}^T\mathbf{w}
+$$
+
+It is similar to the sum-of-squares error function, but we add a penalty term to the error function. So we have:
+
+$$
+E(\mathbf{w}) = E_D(\mathbf{m}_N) + \frac{1}{2}(\mathbf{w}-\mathbf{m}_N)^TA(\mathbf{w}-\mathbf{m}_N)
+$$
+
+where $A = \alpha\mathbf{I} + \beta\mathbf{\Phi}^T\mathbf{\Phi}$, and $\mathbf{m}_N = \beta\mathbf{S}_N\mathbf{\Phi}^T\mathbf{t}$. We can rewrite the evidence function as:
+
+$$
+p(\mathbf{t}|\alpha,\beta) = (\frac{\beta}{2\pi} )^{N/2}(\frac{\mathbf{\alpha}}{2\pi})^{M/2}\exp\{-E(\mathbf{m}_N)\}\int\exp\{-\frac{1}{2}(\mathbf{w}-\mathbf{m}_N)^TA(\mathbf{w}-\mathbf{m}_N)\}d\mathbf{w}
+$$
+
+The log of marginal likelihood function is given by:
+
+$$
+\ln p(\mathbf{t}|\alpha,\beta) = \frac{M}{2}\ln\alpha + \frac{N}{2}\ln\beta - E(\mathbf{m}_N) - \frac{1}{2}\ln|A| - \frac{N}{2}\ln(2\pi)
+$$
+
+### 3.5.2 Maximizing the evidence function
+
+We can maximize the evidence function to estimate the hyperparameters respect to $\alpha$. It can be done by defining the following eigenvector equation:
+
+$$
+\alpha\mathbf{u}_i = \sum_{j=1}^{M}\beta\mathbf{\phi}_j\mathbf{\phi}_j^T\mathbf{u}_i = \beta\mathbf{\Phi}\mathbf{\Phi}^T\mathbf{u}_i
+$$
+
+Take derivative of the log of the evidence function with respect to $\alpha$ and set it to zero, we have:
+
+$$
+\frac{\partial\ln p(\mathbf{t}|\alpha,\beta)}{\partial\alpha} = \frac{M}{2\alpha} - \frac{1}{2}\mathbf{m}_N^T\mathbf{m}_N - \frac{1}{2}\text{Tr}(\mathbf{S}_N) = 0
+$$
+
+Then we can get the solution for $\alpha$:
+
+$$
+\alpha = \frac{M}{\mathbf{m}_N^T\mathbf{m}_N}
+$$
+
+Similarly, we can take derivative of the log of the evidence function with respect to $\beta$ and set it to zero, we have:
+
+$$
+\frac{\partial\ln p(\mathbf{t}|\alpha,\beta)}{\partial\beta} = \frac{N}{2\beta} - \frac{1}{2}E_D(\mathbf{m}_N) = 0
+$$
+
+Then we can get the solution for $\beta$:
+
+$$
+\beta = \frac{N}{E_D(\mathbf{m}_N)}
+$$
+
+The $\alpha$ and $\beta$ are the maximum likelihood solution of the hyperparameters. We can use the maximum likelihood solution to estimate the hyperparameters.
+
+### 3.5.3 Effective number of parameters
+
+This section delves into the optimization of hyperparameters $ \alpha $ and $ \beta $ within the Bayesian linear regression framework, explaining the mathematical procedures and the implications of the results obtained.
+
+The process begins by defining the eigenvalue equation associated with the design matrix $ \Phi $, i.e., $ (\beta \Phi^T \Phi) u_i = \lambda_i u_i $. These eigenvalues $ \lambda_i $ represent the curvature of the likelihood function along the directions defined by the eigenvectors.
+
+The optimal value of $ \alpha $ depends on the ratio $ \lambda_i / (\lambda_i + \alpha) $, which indicates the extent to which the corresponding parameter $ w_i $ is well-determined by the data. A higher $ \lambda_i $ relative to $ \alpha $ means that the direction is well-constrained by the data, leading to a parameter estimate close to its maximum likelihood estimate.
+
+ $ \beta $ is re-estimated by comparing the difference between the target values and the model predictions, factoring in the number of data points $ N $ and the effective number of parameters determined by the data $ \gamma $. The formula for updating $ \beta $ takes into account these aspects, adjusting for the actual freedom the model parameters have in fitting the data.
+
+Discusses the Bayesian approach to estimating the noise variance $ \sigma^2 $, contrasting it with the maximum likelihood estimate. The Bayesian method corrects for the effective number of parameters $ \gamma $, using $ N - \gamma $ instead of $ N $ in the variance calculation to account for the reduction in degrees of freedom.
+
+Highlights the benefits of the Bayesian method, which automatically adjusts regularization parameters through data-driven processes without the need for complex cross-validation.
+
+Provides a detailed explanation of why $ \gamma $ represents the number of effectively determined parameters by the data and how this measure is used to correct the estimation of variance.
+Includes an example using synthetic data sets to demonstrate how these theories are applied in practice for tuning and evaluating model hyperparameters.
+
+In summary, this section offers a comprehensive discussion on the optimization of hyperparameters $ \alpha $ and $ \beta $ in Bayesian linear regression models. It elucidates how to interpret and apply these processes practically, enhancing the accuracy of model predictions and understanding the role of hyperparameters in model performance. This facilitates a more nuanced and data-driven approach to model fitting and evaluation in statistical modeling.
