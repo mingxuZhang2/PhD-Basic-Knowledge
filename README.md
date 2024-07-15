@@ -24,7 +24,7 @@ To enhance my foundational knowledge for research, I plan to study the basics of
     - [√]  Word Vectors, Word Senses, and Neural Classifiers [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/CS224N/Chapter%202%20Word%20Vectors%2C%20Word%20Senses%2C%20and%20Neural%20Classifiers) [Assignment1(Done)](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/blob/main/CS224N/Chapter%202%20Word%20Vectors%2C%20Word%20Senses%2C%20and%20Neural%20Classifiers/Assignment1/student/exploring_word_vectors.ipynb)
     - [√]  Backpropagation and Neural Network Basics [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/CS224N/Chapter%203%20BP%20and%20Neural%20Network) 
     - [√]  Dependency Parsing [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/CS224N/Chapter%204%20Dependency%20Parsing) [Assignment2_Written(Done)](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/blob/main/CS224N/Chapter%203%20BP%20and%20Neural%20Network/Assgnment%202/CS224N_Assignment2_Written.pdf) [Assignment2_Coding(Done)](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/CS224N/Chapter%203%20BP%20and%20Neural%20Network/Assgnment%202/student)
-    - [ ]  Recurrent Neural Networks
+    - [√]  Recurrent Neural Networks [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/CS224N/Chapter%205%20Language%20Models%20and%20Recurrent%20Neural%20Networks)
     - [ ]  Sequence to Sequence Models and Machine Translation
     - [ ]  LLM intro
     - [ ]  Transformers
