@@ -7,7 +7,7 @@ To enhance my foundational knowledge for research, I plan to study the basics of
     - [√]  Introduction [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/PRML/Chapter%201%20Introduction)
     - [√]  Probability Distributions [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/PRML/Chapter%202%20Probability%20Distributions)
     - [√]  Linear Models for Regression [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/PRML/Chapter%203%20Linear%20Models%20for%20Regression)
-    - [ ]  Linear Models for Classification
+    - [√]  Linear Models for Classification [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/PRML/Chapter%204%20Linear%20Models%20For%20Classification)
     - [ ]  Neural Networks
     - [ ]  Kernel Methods
     - [ ]  Sparse Kernel Machines
