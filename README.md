@@ -64,3 +64,4 @@ To enhance my foundational knowledge for research, I plan to study the basics of
     - [ ] [Improving Word Representations Via Global Context And Multiple Word Prototypes](https://aclanthology.org/P12-1092.pdf)
     - [ ] [A Survey of the State of Explainable AI for Natural Language Processing](https://arxiv.org/pdf/2010.00711)
     - [ ] [Explainable Artificial Intelligence (XAI): Concepts, Taxonomies, Opportunities and Challenges toward Responsible AI](https://arxiv.org/pdf/1910.10045)
+    - [ ] [From Language Modeling to Instruction Following: Understanding the Behavior Shift in LLMs after Instruction Tuning](https://arxiv.org/abs/2310.00492)
