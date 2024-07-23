@@ -8,7 +8,7 @@ To enhance my foundational knowledge for research, I plan to study the basics of
     - [√]  Probability Distributions [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/PRML/Chapter%202%20Probability%20Distributions)
     - [√]  Linear Models for Regression [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/PRML/Chapter%203%20Linear%20Models%20for%20Regression)
     - [√]  Linear Models for Classification [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/PRML/Chapter%204%20Linear%20Models%20For%20Classification)
-    - [ ]  Neural Networks
+    - [√]  Neural Networks [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/PRML/Chapter%205%20Neural%20Network)
     - [ ]  Kernel Methods
     - [ ]  Sparse Kernel Machines
     - [ ]  Graphical Models
@@ -24,8 +24,8 @@ To enhance my foundational knowledge for research, I plan to study the basics of
     - [√]  Word Vectors, Word Senses, and Neural Classifiers [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/CS224N/Chapter%202%20Word%20Vectors%2C%20Word%20Senses%2C%20and%20Neural%20Classifiers) [Assignment1(Done)](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/blob/main/CS224N/Chapter%202%20Word%20Vectors%2C%20Word%20Senses%2C%20and%20Neural%20Classifiers/Assignment1/student/exploring_word_vectors.ipynb)
     - [√]  Backpropagation and Neural Network Basics [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/CS224N/Chapter%203%20BP%20and%20Neural%20Network) 
     - [√]  Dependency Parsing [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/CS224N/Chapter%204%20Dependency%20Parsing) [Assignment2_Written(Done)](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/blob/main/CS224N/Chapter%203%20BP%20and%20Neural%20Network/Assgnment%202/CS224N_Assignment2_Written.pdf) [Assignment2_Coding(Done)](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/CS224N/Chapter%203%20BP%20and%20Neural%20Network/Assgnment%202/student)
-    - [√]  Recurrent Neural Networks [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/CS224N/Chapter%205%20Language%20Models%20and%20Recurrent%20Neural%20Networks)
-    - [ ]  Sequence to Sequence Models and Machine Translation
+    - [√]  Recurrent Neural Networks [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/CS224N/Chapter%205%20Language%20Models%20and%20Recurrent%20Neural%20Networks) [Assignment3_Written(Done)](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/blob/main/CS224N/Chapter%205%20Language%20Models%20and%20Recurrent%20Neural%20Networks/Assignment%203/CS224N_Assignment3_Written.pdf) [Assignment3_Coding(Done)](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/CS224N/Chapter%205%20Language%20Models%20and%20Recurrent%20Neural%20Networks/Assignment%203/student)
+    - [ ]  Sequence to Sequence Models and Machine Translation [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/CS224N/Chapter%206%20LSTM%2C%20RNNs%20And%20Neural%20Machine%20Translation)
     - [ ]  LLM intro
     - [ ]  Transformers
     - [ ]  Pretraining
@@ -44,7 +44,7 @@ To enhance my foundational knowledge for research, I plan to study the basics of
     - [√]  Tabular Methods [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/EasyRL/Chapter%203%20Tabular%20Methods)
     - [√]  Policy Gradient [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/EasyRL/Chapter%204%20Policy%20Gradient)
     - [√]  PPO [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/EasyRL/Chapter%205%20PPO)
-    - [ ]  DQN Basic
+    - [ ]  DQN Basic [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/EasyRL/Chapter%206%20DQN_Basic)
     - [ ]  DQN Tricks
     - [ ]  DQN for Continue Actions Space
     - [ ]  AC Algorithm
