@@ -1,0 +1,185 @@
+{
+    "example_source": [
+        "▁我还",
+        "澄清",
+        "了",
+        "在该",
+        "会议上",
+        "提出的",
+        "若干",
+        "事项",
+        "。"
+    ],
+    "example_target": [
+        "<s>",
+        "▁i",
+        "▁was",
+        "▁able",
+        "▁to",
+        "▁provide",
+        "▁clarification",
+        "▁on",
+        "▁some",
+        "▁of",
+        "▁the",
+        "▁matters",
+        "▁which",
+        "▁were",
+        "▁raised",
+        "▁at",
+        "▁that",
+        "▁meeting",
+        ".",
+        "</s>"
+    ],
+    "hypotheses": [
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁like",
+                "▁to",
+                "▁make",
+                "▁the",
+                "▁secretary",
+                "-",
+                "general",
+                "▁on",
+                "▁the",
+                "▁conference",
+                "."
+            ],
+            "score": -17.001741409301758
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁like",
+                "▁to",
+                "▁make",
+                "▁the",
+                "▁secretary",
+                "-",
+                "general",
+                "'",
+                "s",
+                "▁meeting",
+                "."
+            ],
+            "score": -17.047195434570312
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁like",
+                "▁to",
+                "▁make",
+                "▁the",
+                "▁secretary",
+                "-",
+                "general",
+                "▁in",
+                "▁the",
+                "▁conference",
+                "."
+            ],
+            "score": -17.11125946044922
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁like",
+                "▁to",
+                "▁make",
+                "▁the",
+                "▁secretary",
+                "-",
+                "general",
+                "▁for",
+                "▁the",
+                "▁conference",
+                "."
+            ],
+            "score": -17.344846725463867
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁like",
+                "▁to",
+                "▁make",
+                "▁the",
+                "▁secretary",
+                "-",
+                "general",
+                "'",
+                "s",
+                "▁conference",
+                "▁on",
+                "▁the",
+                "▁conference",
+                "."
+            ],
+            "score": -21.437782287597656
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁like",
+                "▁to",
+                "▁make",
+                "▁the",
+                "▁secretary",
+                "-",
+                "general",
+                "'",
+                "s",
+                "▁meeting",
+                ",",
+                "▁i",
+                "▁would",
+                "▁like",
+                "▁to",
+                "▁make",
+                "▁a",
+                "▁matter",
+                "."
+            ],
+            "score": -29.577651977539062
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁like",
+                "▁to",
+                "▁make",
+                "▁the",
+                "▁secretary",
+                "-",
+                "general",
+                "'",
+                "s",
+                "▁meeting",
+                ",",
+                "▁i",
+                "▁would",
+                "▁like",
+                "▁to",
+                "▁make",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁work",
+                "."
+            ],
+            "score": -31.621109008789062
+        }
+    ],
+    "diagnostic_info": "eyJ0IjogIjIwMjQtMDctMjNUMDg6MTY6NTkuMjAxMzU3IiwgImgiOiAiYmxkLXNlcnZlciIsICJ1IjogInpoYW5nbXgifQ=="
+}

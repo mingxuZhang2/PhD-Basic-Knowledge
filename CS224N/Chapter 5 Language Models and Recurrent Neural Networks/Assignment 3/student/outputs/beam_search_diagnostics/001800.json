@@ -1,0 +1,206 @@
+{
+    "example_source": [
+        "▁我还",
+        "澄清",
+        "了",
+        "在该",
+        "会议上",
+        "提出的",
+        "若干",
+        "事项",
+        "。"
+    ],
+    "example_target": [
+        "<s>",
+        "▁i",
+        "▁was",
+        "▁able",
+        "▁to",
+        "▁provide",
+        "▁clarification",
+        "▁on",
+        "▁some",
+        "▁of",
+        "▁the",
+        "▁matters",
+        "▁which",
+        "▁were",
+        "▁raised",
+        "▁at",
+        "▁that",
+        "▁meeting",
+        ".",
+        "</s>"
+    ],
+    "hypotheses": [
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁also",
+                "▁like",
+                "▁to",
+                "▁see",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁issues",
+                "."
+            ],
+            "score": -12.748699188232422
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁also",
+                "▁like",
+                "▁to",
+                "▁make",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁issues",
+                "."
+            ],
+            "score": -12.934164047241211
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁also",
+                "▁like",
+                "▁to",
+                "▁see",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁delegations",
+                "."
+            ],
+            "score": -13.073588371276855
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁also",
+                "▁like",
+                "▁to",
+                "▁make",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁delegations",
+                "."
+            ],
+            "score": -13.153990745544434
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁also",
+                "▁like",
+                "▁to",
+                "▁express",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁issues",
+                "."
+            ],
+            "score": -13.19671630859375
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁also",
+                "▁like",
+                "▁to",
+                "▁express",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁delegations",
+                "."
+            ],
+            "score": -13.365152359008789
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁also",
+                "▁like",
+                "▁to",
+                "▁talk",
+                "▁about",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁issues",
+                "."
+            ],
+            "score": -14.28343677520752
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁also",
+                "▁like",
+                "▁to",
+                "▁talk",
+                "▁about",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁delegations",
+                "."
+            ],
+            "score": -14.719093322753906
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁also",
+                "▁like",
+                "▁to",
+                "▁make",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁issues",
+                "▁in",
+                "▁the",
+                "▁meeting",
+                "."
+            ],
+            "score": -16.292072296142578
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁also",
+                "▁like",
+                "▁to",
+                "▁see",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁issues",
+                "▁in",
+                "▁the",
+                "▁meeting",
+                "."
+            ],
+            "score": -16.388931274414062
+        }
+    ],
+    "diagnostic_info": "eyJ0IjogIjIwMjQtMDctMjNUMDg6MTg6MTIuMjkxMTk1IiwgImgiOiAiYmxkLXNlcnZlciIsICJ1IjogInpoYW5nbXgifQ=="
+}

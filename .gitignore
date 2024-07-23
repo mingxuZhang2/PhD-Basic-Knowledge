@@ -1,0 +1,10 @@
+# igonre the files which size is greater than 100MB
+*.mp4
+*.avi
+*.mkv
+*.mov
+*.wmv
+*.flv
+*.webm
+*.bin
+*.bin.optim

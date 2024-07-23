@@ -1,0 +1,195 @@
+{
+    "example_source": [
+        "▁我还",
+        "澄清",
+        "了",
+        "在该",
+        "会议上",
+        "提出的",
+        "若干",
+        "事项",
+        "。"
+    ],
+    "example_target": [
+        "<s>",
+        "▁i",
+        "▁was",
+        "▁able",
+        "▁to",
+        "▁provide",
+        "▁clarification",
+        "▁on",
+        "▁some",
+        "▁of",
+        "▁the",
+        "▁matters",
+        "▁which",
+        "▁were",
+        "▁raised",
+        "▁at",
+        "▁that",
+        "▁meeting",
+        ".",
+        "</s>"
+    ],
+    "hypotheses": [
+        {
+            "hypothesis": [
+                "▁i",
+                "▁have",
+                "▁also",
+                "▁clarified",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁matters",
+                "."
+            ],
+            "score": -7.463016033172607
+        },
+        {
+            "hypothesis": [
+                "▁there",
+                "▁are",
+                "▁also",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁matters",
+                "."
+            ],
+            "score": -7.58975887298584
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁have",
+                "▁also",
+                "▁discussed",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁matters",
+                "."
+            ],
+            "score": -8.374444961547852
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁am",
+                "▁also",
+                "▁pleased",
+                "▁to",
+                "▁have",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁matters",
+                "."
+            ],
+            "score": -9.17634105682373
+        },
+        {
+            "hypothesis": [
+                "▁there",
+                "▁are",
+                "▁also",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁matters",
+                "▁in",
+                "▁the",
+                "▁meeting",
+                "."
+            ],
+            "score": -9.369234085083008
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁also",
+                "▁like",
+                "▁to",
+                "▁make",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁matters",
+                "."
+            ],
+            "score": -9.707096099853516
+        },
+        {
+            "hypothesis": [
+                "▁there",
+                "▁are",
+                "▁also",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁matters",
+                "▁on",
+                "▁the",
+                "▁meeting",
+                "."
+            ],
+            "score": -9.757326126098633
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁also",
+                "▁like",
+                "▁to",
+                "▁give",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁matters",
+                "."
+            ],
+            "score": -9.799529075622559
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁have",
+                "▁also",
+                "▁clarified",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁matters",
+                "▁on",
+                "▁the",
+                "▁meeting",
+                "."
+            ],
+            "score": -10.269913673400879
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁am",
+                "▁also",
+                "▁pleased",
+                "▁to",
+                "▁have",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁matters",
+                "▁in",
+                "▁the",
+                "▁meeting",
+                "."
+            ],
+            "score": -11.981411933898926
+        }
+    ],
+    "diagnostic_info": "eyJ0IjogIjIwMjQtMDctMjNUMDg6MjI6NTguMzQxMTQzIiwgImgiOiAiYmxkLXNlcnZlciIsICJ1IjogInpoYW5nbXgifQ=="
+}

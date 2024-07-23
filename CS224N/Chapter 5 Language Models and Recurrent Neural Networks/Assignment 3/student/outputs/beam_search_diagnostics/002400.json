@@ -1,0 +1,214 @@
+{
+    "example_source": [
+        "▁我还",
+        "澄清",
+        "了",
+        "在该",
+        "会议上",
+        "提出的",
+        "若干",
+        "事项",
+        "。"
+    ],
+    "example_target": [
+        "<s>",
+        "▁i",
+        "▁was",
+        "▁able",
+        "▁to",
+        "▁provide",
+        "▁clarification",
+        "▁on",
+        "▁some",
+        "▁of",
+        "▁the",
+        "▁matters",
+        "▁which",
+        "▁were",
+        "▁raised",
+        "▁at",
+        "▁that",
+        "▁meeting",
+        ".",
+        "</s>"
+    ],
+    "hypotheses": [
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁also",
+                "▁like",
+                "▁to",
+                "▁discuss",
+                "▁the",
+                "▁number",
+                "▁of",
+                "▁issues",
+                "."
+            ],
+            "score": -15.252213478088379
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁also",
+                "▁like",
+                "▁to",
+                "▁comment",
+                "▁on",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁issues",
+                "."
+            ],
+            "score": -16.111682891845703
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁also",
+                "▁like",
+                "▁to",
+                "▁comment",
+                "▁on",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁discussion",
+                "."
+            ],
+            "score": -16.419748306274414
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁also",
+                "▁like",
+                "▁to",
+                "▁clarification",
+                "▁on",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁issues",
+                "."
+            ],
+            "score": -16.55845832824707
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁also",
+                "▁like",
+                "▁to",
+                "▁comment",
+                "▁on",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁questions",
+                "."
+            ],
+            "score": -16.725343704223633
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁also",
+                "▁like",
+                "▁to",
+                "▁comment",
+                "▁on",
+                "▁the",
+                "▁number",
+                "▁of",
+                "▁issues",
+                "."
+            ],
+            "score": -16.84534454345703
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁also",
+                "▁like",
+                "▁to",
+                "▁comment",
+                "▁on",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁matters",
+                "."
+            ],
+            "score": -16.972915649414062
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁also",
+                "▁like",
+                "▁to",
+                "▁comment",
+                "▁on",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁several",
+                "▁issues",
+                "."
+            ],
+            "score": -17.761472702026367
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁also",
+                "▁like",
+                "▁to",
+                "▁comment",
+                "▁on",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁discussion",
+                "▁on",
+                "▁the",
+                "▁meeting",
+                "."
+            ],
+            "score": -19.03607940673828
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁would",
+                "▁also",
+                "▁like",
+                "▁to",
+                "▁comment",
+                "▁on",
+                "▁the",
+                "▁matter",
+                "▁of",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁issues",
+                "."
+            ],
+            "score": -19.254901885986328
+        }
+    ],
+    "diagnostic_info": "eyJ0IjogIjIwMjQtMDctMjNUMDg6MTk6MjQuNTcwNDY3IiwgImgiOiAiYmxkLXNlcnZlciIsICJ1IjogInpoYW5nbXgifQ=="
+}

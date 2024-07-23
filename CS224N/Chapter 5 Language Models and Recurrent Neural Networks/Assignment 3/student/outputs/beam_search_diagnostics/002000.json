@@ -1,0 +1,215 @@
+{
+    "example_source": [
+        "▁我还",
+        "澄清",
+        "了",
+        "在该",
+        "会议上",
+        "提出的",
+        "若干",
+        "事项",
+        "。"
+    ],
+    "example_target": [
+        "<s>",
+        "▁i",
+        "▁was",
+        "▁able",
+        "▁to",
+        "▁provide",
+        "▁clarification",
+        "▁on",
+        "▁some",
+        "▁of",
+        "▁the",
+        "▁matters",
+        "▁which",
+        "▁were",
+        "▁raised",
+        "▁at",
+        "▁that",
+        "▁meeting",
+        ".",
+        "</s>"
+    ],
+    "hypotheses": [
+        {
+            "hypothesis": [
+                "▁i",
+                "▁also",
+                "▁have",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁number",
+                "▁of",
+                "▁issues",
+                "."
+            ],
+            "score": -12.87388801574707
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁have",
+                "▁also",
+                "▁made",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁number",
+                "▁of",
+                "▁issues",
+                "."
+            ],
+            "score": -14.02456283569336
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁also",
+                "▁have",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁number",
+                "▁of",
+                "▁several",
+                "▁issues",
+                "."
+            ],
+            "score": -14.791830062866211
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁also",
+                "▁have",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁number",
+                "▁of",
+                "▁number",
+                "▁of",
+                "▁issues",
+                "."
+            ],
+            "score": -15.14375114440918
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁have",
+                "▁also",
+                "▁made",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁number",
+                "▁of",
+                "▁number",
+                "▁of",
+                "▁issues",
+                "."
+            ],
+            "score": -16.499418258666992
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁also",
+                "▁have",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁number",
+                "▁of",
+                "▁issues",
+                "▁in",
+                "▁the",
+                "▁meeting",
+                "."
+            ],
+            "score": -16.67353057861328
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁also",
+                "▁have",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁number",
+                "▁of",
+                "▁issues",
+                "▁of",
+                "▁the",
+                "▁meeting",
+                "."
+            ],
+            "score": -16.8642520904541
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁also",
+                "▁have",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁number",
+                "▁of",
+                "▁number",
+                "▁of",
+                "▁number",
+                "▁of",
+                "▁issues",
+                "."
+            ],
+            "score": -17.930204391479492
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁have",
+                "▁also",
+                "▁made",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁number",
+                "▁of",
+                "▁issues",
+                "▁in",
+                "▁the",
+                "▁meeting",
+                "."
+            ],
+            "score": -17.987022399902344
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁also",
+                "▁have",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁number",
+                "▁of",
+                "▁issues",
+                "▁in",
+                "▁the",
+                "▁meeting",
+                "▁of",
+                "▁the",
+                "▁meeting",
+                "."
+            ],
+            "score": -20.006141662597656
+        }
+    ],
+    "diagnostic_info": "eyJ0IjogIjIwMjQtMDctMjNUMDg6MTg6MzYuMjg4ODE1IiwgImgiOiAiYmxkLXNlcnZlciIsICJ1IjogInpoYW5nbXgifQ=="
+}

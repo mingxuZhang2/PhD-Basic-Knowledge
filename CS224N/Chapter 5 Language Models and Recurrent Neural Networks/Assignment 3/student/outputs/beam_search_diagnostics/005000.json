@@ -1,0 +1,252 @@
+{
+    "example_source": [
+        "▁我还",
+        "澄清",
+        "了",
+        "在该",
+        "会议上",
+        "提出的",
+        "若干",
+        "事项",
+        "。"
+    ],
+    "example_target": [
+        "<s>",
+        "▁i",
+        "▁was",
+        "▁able",
+        "▁to",
+        "▁provide",
+        "▁clarification",
+        "▁on",
+        "▁some",
+        "▁of",
+        "▁the",
+        "▁matters",
+        "▁which",
+        "▁were",
+        "▁raised",
+        "▁at",
+        "▁that",
+        "▁meeting",
+        ".",
+        "</s>"
+    ],
+    "hypotheses": [
+        {
+            "hypothesis": [
+                "▁i",
+                "▁am",
+                "▁also",
+                "▁clarification",
+                "▁on",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁matters",
+                "▁relating",
+                "▁to",
+                "▁the",
+                "▁meeting",
+                "."
+            ],
+            "score": -12.40982437133789
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁am",
+                "▁also",
+                "▁clarification",
+                "▁on",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁matters",
+                "▁in",
+                "▁the",
+                "▁conference",
+                "."
+            ],
+            "score": -13.108882904052734
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁am",
+                "▁also",
+                "▁clarification",
+                "▁on",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁matters",
+                "▁relating",
+                "▁to",
+                "▁the",
+                "▁conference",
+                "."
+            ],
+            "score": -13.279348373413086
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁am",
+                "▁also",
+                "▁clarification",
+                "▁on",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁matters",
+                "▁relating",
+                "▁to",
+                "▁the",
+                "▁meeting",
+                "▁in",
+                "▁the",
+                "▁conference",
+                "."
+            ],
+            "score": -15.503408432006836
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁am",
+                "▁also",
+                "▁clarification",
+                "▁on",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁matters",
+                "▁relating",
+                "▁to",
+                "▁the",
+                "▁meeting",
+                "▁of",
+                "▁the",
+                "▁meeting",
+                "."
+            ],
+            "score": -15.645308494567871
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁am",
+                "▁also",
+                "▁clarification",
+                "▁on",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁matters",
+                "▁relating",
+                "▁to",
+                "▁the",
+                "▁meeting",
+                "▁of",
+                "▁the",
+                "▁conference",
+                "."
+            ],
+            "score": -16.024356842041016
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁am",
+                "▁also",
+                "▁clarification",
+                "▁on",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁matters",
+                "▁relating",
+                "▁to",
+                "▁the",
+                "▁meeting",
+                "▁in",
+                "▁the",
+                "▁meeting",
+                "."
+            ],
+            "score": -16.061481475830078
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁am",
+                "▁also",
+                "▁clarification",
+                "▁on",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁matters",
+                "▁relating",
+                "▁to",
+                "▁the",
+                "▁conference",
+                "▁on",
+                "▁the",
+                "▁meeting",
+                "."
+            ],
+            "score": -16.13433837890625
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁am",
+                "▁also",
+                "▁clarification",
+                "▁on",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁matters",
+                "▁relating",
+                "▁to",
+                "▁the",
+                "▁meeting",
+                "▁of",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁matters",
+                "."
+            ],
+            "score": -17.21775245666504
+        },
+        {
+            "hypothesis": [
+                "▁i",
+                "▁am",
+                "▁also",
+                "▁clarification",
+                "▁on",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁matters",
+                "▁relating",
+                "▁to",
+                "▁the",
+                "▁meeting",
+                "▁of",
+                "▁a",
+                "▁number",
+                "▁of",
+                "▁issues",
+                "."
+            ],
+            "score": -17.736574172973633
+        }
+    ],
+    "diagnostic_info": "eyJ0IjogIjIwMjQtMDctMjNUMDg6MjQ6MDcuMzA3ODk1IiwgImgiOiAiYmxkLXNlcnZlciIsICJ1IjogInpoYW5nbXgifQ=="
+}
