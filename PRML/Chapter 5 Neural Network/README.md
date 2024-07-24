@@ -363,3 +363,74 @@ There are three components in the CNN:
 - Pooling layer(Down Sampling): The pooling layer is used to reduce the dimension of the image. The pooling layer is a set of pooling functions that are applied to the image. The pooling functions are used to reduce the dimension of the image. The pooling functions are applied to the image by the pooling operation. The pooling operation is a non-linear operation. The pooling layer is a very efficient method to reduce the dimension of the image.
 
 - Fully connected layer: The fully connected layer is used to classify the image. The fully connected layer is a set of neurons that are connected to the output of the pooling layer. The fully connected layer is a very efficient method to classify the image.
+
+![Convolutional Neural Networks](fig/image4.png)
+
+### 5.5.7 Soft Weight-Sharing
+
+Consider that we need to reduce the complexity of a neural network that has a lot of parameters. One method is that we can group the parameters into different groups according to a certain policy. Then, we let the parameters in the same group share the same value. The method is called soft weight-sharing. The soft weight-sharing is a very efficient method to reduce the complexity of the neural network.
+
+We can use soft weight-sharing to optimize the previous regularization term. We can devide different parameters into different groups according to the Gaussian distribution parameters. In the mixture of Gaussian distribution, each sub-distribution expectation, variance, the mixture coefficient can be considered as a adjustable parameter and will determined during the training process. So we have the probability density function:
+
+$$
+p(\mathbf{w}) = \Pi_i p(w_i)
+$$
+
+where $p(w_i)$ is the Gaussian distribution is given by:
+
+$$
+p(w_i) = \sum_{j=1}^M \pi_j \mathcal{N}(w_i|\mu_j, \sigma_j^2)
+$$
+
+where $\pi_j$ is the mixture coefficient, $\mu_j$ is the expectation and $\sigma_j^2$ is the variance. We take the negative log likelihood function as the regularization term:
+
+$$
+\Omega = -\ln p(\mathbf{w}) = -\sum_i \ln p(w_i) = -\sum_i \ln \sum_{j=1}^M \pi_j \mathcal{N}(w_i|\mu_j, \sigma_j^2)
+$$
+
+We need to calculate the gradient of the regularization term. The gradient of the regularization term is given by:
+
+$$
+\frac{\partial \Omega}{\partial w_i} = -\sum_j \frac{\pi_j \mathcal{N}(w_i|\mu_j, \sigma_j^2)}{\sum_{j'} \pi_{j'} \mathcal{N}(w_i|\mu_{j'}, \sigma_{j'}^2)}
+$$
+
+Consider in a high viewpoint, we need to minimize the error function so we need to minimize the regularization term. That is said we want to maximize the probability that in the same group it has the same distribution. 
+
+### 5.6 Mixture Density Networks
+
+The goal of supervised learning is to model the conditional distribution of the target variable given the input variable. It is good when the distribution has single peak. But if the distribution has multiple peaks, the single peak model is not good enough. The mixture density network is a method to model the conditional distribution of the target variable given the input variable.
+
+The core insight of mixture density network is that the neural network will not only output the single prediction but also output the parameters of the mixture distribution like the expectation, variance and the mixture coefficient. The mixture density network is a very efficient method to model the conditional distribution of the target variable given the input variable.
+
+The mixture density network is a feed-forward neural network that has the mixture density layer. The mixture density layer is used to output the parameters of the mixture distribution. The mixture density layer is a very efficient method to model the conditional distribution of the target variable given the input variable.
+
+## 5.7 Bayesian Neural Networks
+
+Traditional neural networks are point estimates of the parameters. But the point estimates are not enough because the point estimates do not have the uncertainty. The Bayesian neural network is a method to model the uncertainty of the parameters. The Bayesian neural network is a very efficient method to model the uncertainty of the parameters.
+
+The parameters are considered as a random variable. The prior distribution of the parameters is given by:
+
+$$
+p(\mathbf{w}|\alpha) = \mathcal{N}(\mathbf{w}|\mathbf{0}, \alpha^{-1}\mathbf{I})
+$$
+
+where $\alpha$ is the precision of the Gaussian distribution. The likelihood function is given by:
+
+$$
+p(\mathbf{t}|\mathbf{x}, \mathbf{w}, \beta) = \prod_{n=1}^{N} \mathcal{N}(t_n|y(\mathbf{x}_n, \mathbf{w}), \beta^{-1})
+$$
+
+The posterior distribution of the parameters is given by:
+
+$$
+p(\mathbf{w}|\mathbf{t}, \mathbf{x}, \alpha, \beta) = \frac{p(\mathbf{t}|\mathbf{x}, \mathbf{w}, \beta)p(\mathbf{w}|\alpha)}{p(\mathbf{t}|\mathbf{x}, \alpha, \beta)}
+$$
+
+When we observe the data, the posterior distribution of the parameters is given by:
+
+$$
+p(\mathbf{w}|\mathbf{t}, \mathbf{x}, \alpha, \beta) = \mathcal{N}(\mathbf{w}|\mathbf{m}_N, \mathbf{S}_N)
+$$
+
+where $\mathbf{m}_N$ is the mean of the posterior distribution and $\mathbf{S}_N$ is the covariance of the posterior distribution. The Bayesian neural network is a very efficient method to model the uncertainty of the parameters.
+
