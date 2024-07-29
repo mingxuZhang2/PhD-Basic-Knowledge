@@ -26,7 +26,7 @@ To enhance my foundational knowledge for research, I plan to study the basics of
     - [√]  Dependency Parsing [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/CS224N/Chapter%204%20Dependency%20Parsing) [Assignment2_Written(Done)](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/blob/main/CS224N/Chapter%203%20BP%20and%20Neural%20Network/Assgnment%202/CS224N_Assignment2_Written.pdf) [Assignment2_Coding(Done)](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/CS224N/Chapter%203%20BP%20and%20Neural%20Network/Assgnment%202/student)
     - [√]  Recurrent Neural Networks [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/CS224N/Chapter%205%20Language%20Models%20and%20Recurrent%20Neural%20Networks)
     - [√]  Sequence to Sequence Models and Machine Translation [Note](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/CS224N/Chapter%206%20LSTM%2C%20RNNs%20And%20Neural%20Machine%20Translation) [Assignment3_Written(Done)](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/blob/main/CS224N/Chapter%205%20Language%20Models%20and%20Recurrent%20Neural%20Networks/Assignment%203/CS224N_Assignment3_Written.pdf) [Assignment3_Coding(Done)](https://github.com/mingxuZhang2/PhD-Basic-Knowledge/tree/main/CS224N/Chapter%205%20Language%20Models%20and%20Recurrent%20Neural%20Networks/Assignment%203/student)
-    - [ ]  LLM intro
+    - [ ]  Attention
     - [ ]  Transformers
     - [ ]  Pretraining
     - [ ]  Post-training (RLHF, SFT, DPO)
